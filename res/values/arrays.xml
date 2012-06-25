@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string-array name="languages">
+        <item>English</item>
+        <item>Srpski</item>
+    </string-array>
+    <string-array name="language_codes">
+        <item>en</item>
+        <item>sr</item>
+    </string-array>
+    <string-array name="tabs_position">
+        <item>@string/tabs_position_top</item>
+        <item>@string/tabs_position_bottom</item>
+    </string-array>
+    <string-array name="tabs_position_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="tabs">
+        <item>@string/station</item>
+        <item>@string/location</item>
+        <item>@string/favorites</item>
+    </string-array>
+    <string-array name="tab_ids">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="sort_by_options">
+        <item>@string/station_code</item>
+        <item>@string/station_name_alone</item>
+    </string-array>
+    <string-array name="sort_by_options_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="zones">
+        <item>@string/its1_1</item>
+        <item>@string/its1_2</item>
+        <item>@string/its2_1</item>
+        <item>@string/its2_2</item>
+        <item>@string/its2_3</item>
+        <item>@string/its2_4</item>
+        <item>@string/its2_5</item>
+        <item>@string/its2_6</item>
+        <item>@string/its2_7</item>
+        <item>@string/its2_8</item>
+        <item>@string/its2_9</item>
+        <item>@string/its2_10</item>
+    </string-array>
+    <string-array name="zone_fares">
+        <item>60</item>
+        <item>95</item>
+        <item>80</item>
+        <item>100</item>
+        <item>125</item>
+        <item>150</item>
+        <item>175</item>
+        <item>200</item>
+        <item>225</item>
+        <item>250</item>
+        <item>275</item>
+        <item>300</item>
+    </string-array>
+    <string-array name="widget_types">
+        <item>@string/widget_type1</item>
+        <item>@string/widget_type2</item>
+        <item>@string/widget_type3</item>
+    </string-array>
+    <string-array name="widget_types_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="widget_types_icons">
+        <item>@drawable/widget_type1</item>
+        <item>@drawable/widget_type2</item>
+        <item>@drawable/widget_type3</item>
+    </string-array>
+
+</resources>

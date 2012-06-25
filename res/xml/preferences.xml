@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:iconlistpreference="http://schemas.android.com/apk/res/com.dvuckovic.busplus" >
+
+    <PreferenceCategory
+        android:key="category_general"
+        android:title="@string/general" >
+        <ListPreference
+            android:defaultValue="sr"
+            android:dialogTitle="@string/choose_language"
+            android:entries="@array/languages"
+            android:entryValues="@array/language_codes"
+            android:key="language"
+            android:summary="@string/interface_language"
+            android:title="@string/language" />
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/tabs_position"
+            android:entries="@array/tabs_position"
+            android:entryValues="@array/tabs_position_values"
+            android:key="tabs_position"
+            android:summary="@string/tabs_position_summary"
+            android:title="@string/tabs_position" />
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/start_tab"
+            android:entries="@array/tabs"
+            android:entryValues="@array/tab_ids"
+            android:key="start_tab"
+            android:summary="@string/start_tab_summary"
+            android:title="@string/start_tab" />
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/sort_by"
+            android:entries="@array/sort_by_options"
+            android:entryValues="@array/sort_by_options_values"
+            android:key="sort_by"
+            android:summary="@string/sort_by_summary"
+            android:title="@string/sort_by" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="category_map"
+        android:title="@string/map" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="map_satellite"
+            android:summary="@string/map_satellite_summary"
+            android:title="@string/map_satellite" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="category_shortcut"
+        android:title="@string/shortcuts" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="shortcut_custom_color"
+            android:summary="@string/shortcut_custom_color_summary"
+            android:title="@string/shortcut_custom_color" />
+
+        <com.dvuckovic.busplus.SeekBarPreference
+            android:defaultValue="180"
+            android:dependency="shortcut_custom_color"
+            android:key="shortcut_hue"
+            android:title="@string/shortcut_hue" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="category_widget"
+        android:title="@string/widget" >
+        <EditTextPreference
+            android:defaultValue="600"
+            android:dialogMessage="@string/widget_help"
+            android:digits="1234567890"
+            android:hint="@string/widget_title"
+            android:inputType="phone"
+            android:key="widget_balance"
+            android:maxLength="5"
+            android:summary="@string/widget_summary"
+            android:title="@string/widget_title" />
+
+        <ListPreference
+            android:defaultValue="60"
+            android:dialogTitle="@string/widget_zone"
+            android:entries="@array/zones"
+            android:entryValues="@array/zone_fares"
+            android:key="widget_zone"
+            android:summary="@string/widget_zone_summary"
+            android:title="@string/widget_zone" />
+
+        <com.dvuckovic.busplus.IconListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/widget_type"
+            android:entries="@array/widget_types"
+            android:entryValues="@array/widget_types_values"
+            android:key="widget_type"
+            android:summary="@string/widget_type_summary"
+            android:title="@string/widget_type"
+            iconlistpreference:entryIcons="@array/widget_types_icons" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

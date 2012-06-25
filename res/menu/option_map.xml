@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/centerLocation"
+        android:icon="@drawable/ic_menu_mylocation"
+        android:title="@string/center_location"/>
+    <item
+        android:id="@+id/showLine"
+        android:icon="@drawable/ic_menu_directions"
+        android:title="@string/show_line"/>
+    <item
+        android:id="@+id/showNearby"
+        android:icon="@drawable/ic_menu_myplaces"
+        android:title="@string/show_nearby"/>
+    <item
+        android:id="@+id/showView"
+        android:icon="@drawable/ic_menu_view"
+        android:title="@string/show_view"/>
+
+</menu>

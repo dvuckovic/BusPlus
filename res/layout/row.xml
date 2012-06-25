@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/itemId"
+        android:layout_width="60dp"
+        android:layout_height="36dp"
+        android:gravity="center|center_vertical"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textColor="@android:color/darker_gray" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="fill_parent"
+        android:layout_height="36dp"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="@android:color/white" >
+    </TextView>
+
+</LinearLayout>
