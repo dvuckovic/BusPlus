@@ -1,33 +1,26 @@
 BusPlus
 ======
 
-<img align="left" src="http://www.dvuckovic.com/sites/default/files/projects/icons/busplus.png" border="10"/> BusPlus is a small Android app for mass transit system in Belgrade that shows how far is the next bus from your station. As my first full app I used it to teach myself several things about development for Android OS.
-
-Coding for Android is relatively easy and I found all the necessary help by reading various Q&A at [Stack Overflow](http://stackoverflow.com) and by using [this nice book](http://commonsware.com/AdvAndroid/) as a reference. Web is full of examples and tutorials on everything Android, and if you have some idea of what you need you will probably find it.
+<img align="right" src="http://www.dvuckovic.com/sites/default/files/projects/icons/busplus.png"/>BusPlus is a small Android app for mass transit system in Belgrade that shows how far is the next bus from your station.
 
 <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-1.jpg" target="_blank" title="Screenshot #1"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-1_thumb.jpg" alt="Screenshot #1" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-2.jpg" target="_blank" title="Screenshot #2"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-2_thumb.jpg" alt="Screenshot #2" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-3.jpg" target="_blank" title="Screenshot #3"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-3_thumb.jpg" alt="Screenshot #3" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-4.jpg" target="_blank" title="Screenshot #4"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-4_thumb.jpg" alt="Screenshot #4" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-5.jpg" target="_blank" title="Screenshot #5"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-5_thumb.jpg" alt="Screenshot #5" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-6.jpg" target="_blank" title="Screenshot #6"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-6_thumb.jpg" alt="Screenshot #6" border="0"/></a>
-
-BusPlus system
-------
-
-At the start of 2012 mass transit in Belgrade, Serbia moved to a new system for payment which added several perks. For example, every vehicle in the system is tracked by GPS and its position is sent to the central computer. To a user this location is available through simple USSD (MMI) service which queries the server and returns information. Of course these locations are coarse (probably for security reasons) and the system can show how many bus stops is a vehicle away from you (your current bus stop). Every bus stop has a unique code which is used as an input for the service. USSD service is available only on three local mobile networks. Service has begun with charging each query since September 16th 2012.
-
-Since there are over 2000 stations in the city, in order to use the service conveniently I came up with an idea for an app. First, I compiled a list of all stations and their codes, along with their geo-coordinates (not an easy task!). Second, I looked into ways to query these USSD codes elegantly. Unfortunately, there is still no USSD API in the works, but I managed to execute them by raising Intent to the system dialer app.
 
 Features
 ------
 
-BusPlus app has three views and can be used to query the service in several ways:
+Belgrade BusPlus system provides users with the location of nearby buses through simple USSD (MMI) info service. Of course these locations are coarse and the system can only show how many bus stops is a vehicle away from you (your current bus stop). Every bus stop has a unique code which is used as an input for the service. USSD service is available only on three local mobile networks and is charged for each query since September 16th 2012.
+
+Unfortunately, there is still no USSD API for Android in the works, but I managed to execute them by raising Intent to the system dialer app. BusPlus app has three views and can be used to query the USSD info service in several ways:
 
 * manual code entry (if you know it :)
 * search by station name (not easy, because most of station names are duplicated for both directions)
 * map of the city with your current location and nearby stations
-* ability to plot stations on a different location on map
+* ability to plot station locations on a map
 * list of favorites with manual entry and entry from database
 
 App also supports two locales (Serbian and English), which can be switched in app Settings menu.
 
-A few updates followed, in which I managed to squeeze in a several new features (mostly from comments):
+Several new features have been squeezed in over time (mostly from comments):
 
 * more complete station database
 * more precise locations for most stations
@@ -43,8 +36,9 @@ A few updates followed, in which I managed to squeeze in a several new features 
 * dismissible charge warning before each query
 * suburban stations & lines
 * Tasker integration
+* ICS API
 
-YouTube
+App in action (YouTube)
 ------
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=a_RA8AqtA94" target="_blank"><img src="http://img.youtube.com/vi/a_RA8AqtA94/0.jpg" 
