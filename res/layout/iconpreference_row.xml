@@ -16,8 +16,8 @@
         android:gravity="center_vertical"
         android:paddingRight="40dip"
         android:singleLine="true"
-        android:textColor="@android:color/black"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
 
     <RadioButton
         android:id="@+id/image_list_view_row_radio_button"
@@ -25,5 +25,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:checked="false"
-        android:gravity="right" />
+        android:gravity="center_vertical" />
 </RelativeLayout>

@@ -29,7 +29,7 @@
         android:singleLine="true"
         android:text="@string/widget_loading"
         android:textColor="@android:color/white"
-        android:textSize="18dp"
+        android:textSize="14dp"
         android:textStyle="bold" />
 
     <TextView

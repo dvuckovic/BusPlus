@@ -29,12 +29,12 @@
     <string name="launcher_shortcut">Dodaj prečicu</string>
     <string name="shortcut">Prečica</string>
     <string name="no_favorites">Nemate odabranih stajališta!</string>
-    <string name="help_favorites">Dodajte prvo koristeći Meni > Dodaj, Meni > Dodaj iz liste, ili dugim dodirom u rezultatima pretrage pod Stajalište > Pretraga.</string>
+    <string name="help_favorites">Dodajte prvo koristeći meni Dodaj, Lista, Linija, ili dugim dodirom u rezultatima pretrage pod Stajalište > Traži.</string>
     <string name="add_to_favorites">Dodaj u odabrana</string>
-    <string name="add">Dodaj ručno</string>
-    <string name="add_from_list">Dodaj iz liste</string>
-    <string name="add_from_line">Dodaj sa linije</string>
-    <string name="clear_favorites">Izbriši odabrana</string>
+    <string name="add">Dodaj</string>
+    <string name="add_from_list">Lista</string>
+    <string name="add_from_line">Linija</string>
+    <string name="clear_favorites">Izbriši</string>
     <string name="cancel">Odustani</string>
     <string name="blank_station_code">Unesite kôd stajališta!</string>
     <string name="blank_station_name">Unesite naziv stajališta!</string>
@@ -43,10 +43,10 @@
     <string name="no">Ne</string>
     <string name="choose_station">Izaberite stajalište</string>
     <string name="current_location">Trenutna lokacija</string>
-    <string name="center_location">Centriraj lokaciju</string>
-    <string name="show_nearby">Prikaži obližnje</string>
-    <string name="show_line">Prikaži sa linije</string>
-    <string name="show_view">Prikaži sve</string>
+    <string name="center_location">Lokacija</string>
+    <string name="show_nearby">Obližnja</string>
+    <string name="show_line">Linija</string>
+    <string name="show_view">Sve</string>
     <string name="general">Aplikacija</string>
     <string name="map">Mapa</string>
     <string name="shortcuts">Prečice</string>
@@ -75,11 +75,11 @@
     <string name="info">Info</string>
     <string name="help">Pomoć</string>
     <string name="help_widget">Widget</string>
-    <string name="help_widget_text">Widget je predviđen za jednostavno vođenje evidencije o preostalom kreditu na nepersonalizovanoj Bus Plus kartici. Jednostavno, podesite kredit i koristite widget da pratite preostalo stanje. Widget ne može da prikaže realno stanje na kartici (to trenutno nije moguće), već prikazuje vrednost na koju ga postavite i održavate.\n\nDa biste dodali widget, dugo držite na desktopu i izaberite Widgets > BusPlus kredit. Biće dodan mali (1x1) widget. Dodir na widget umanjuje vaš kredit za iznos jedne vožnje, dokle god je to moguće.\n\nDa biste podesili kredit na novu vrednost, ili dodirnite widget sa nedevoljno kredita ili idite u Podešavanja > Widget > Kredit i promenite ga tamo.\n\nTarifnu zonu (cenu pojedinačne karte) možete podesiti u Podešavanja > Tarifna zona. Raspitajte se koja tarifa je adekvatna za koju liniju.\n\nDa biste promenili izgled widgeta, idite u Podešavanja > Stil widget-a, i izaberite jedan od ponuđenih.</string>
+    <string name="help_widget_text">Widget je predviđen za jednostavno vođenje evidencije o preostalom kreditu na nepersonalizovanoj Bus Plus kartici. Jednostavno, podesite kredit i koristite widget da pratite preostalo stanje. Widget ne može da prikaže realno stanje na kartici (to trenutno nije moguće), već prikazuje vrednost na koju ga postavite i održavate.\n\nDa biste dodali widget, otvorite launcher i pronađite Widgets > BusPlus kredit. Prevucite ikonicu i biće dodat mali (1x1) widget. Dodir na widget umanjuje vać kredit za iznos jedne vožnje, dokle god je to moguće.\n\nDa biste podesili kredit na novu vrednost, ili dodirnite widget sa nedevoljno kredita ili idite u Podešavanja > Widget > Kredit i promenite ga tamo.\n\nTarifnu zonu (cenu pojedinačne karte) možete podesiti u Podešavanja > Tarifna zona. Raspitajte se koja tarifa je adekvatna za koju liniju.\n\nDa biste promenili izgled widgeta, idite u Podešavanja > Stil widget-a, i izaberite jedan od ponuđenih.</string>
     <string name="help_shortcut_color">Boja ikonice</string>
     <string name="help_shortcut_color_text">Možete promeniti boju ikonice za prečice na desktop-u. Idite u Podešavanja i uključite Boja ikonice. Onda podesite ton ikonice pomeranjem podešavanja ispod. Za vraćanje početne nijanse, dodirnite ikonicu levo.\n\nSada će svaka nova prečica koristiti postavljenu boju ikonice. Za novu promenu, idite u podešavanja i promenite nijansu. Za isključivanje ove opcije, isključite Boja ikonice.</string>
     <string name="about">O aplikaciji</string>
-    <string name="about_text">BusPlus je nezvanična Android aplikacija koja pojednostavljuje korišćenje Bus Plus USSD servisa za javljanje podataka o udaljenosti sledećeg prevoza od vaše stanice.\n\nServis prihvata kodove stajališta kao upit i aplikacija pokušava da olakša ovaj proces kako ne biste morali da znate tačne kodove.\n\nKodovi stajališta mogu biti izlistani ili po njihovom nazivu ili po nazivu/broju linije (koje koriste te stanice u odgovarajućem smeru).\n\nDodatno, aplikacija može da prikaže i lokacije stajališta na mapi, zajedno sa vašom lokacijom (koja se pribavlja preko GPS).\n\nStanice mogu biti dodate u listu odabranih za kasnije brže korišćenje. Ova lista se čuva između dva update-a, pa nema bojazni da će se izgubiti (osim ukoliko namerno ne obrišete aplikaciju).\n\nMnoge opcije mogu biti promenjene preko menija Podešavanja na prvom tabu. Slično, dosta funkcija se nalazi i u menijima u drugim tabovima.</string>
+    <string name="about_text">BusPlus je <b>nezvanična</b> Android aplikacija koja pojednostavljuje korišćenje Bus Plus USSD info servisa za javljanje podataka o udaljenosti sledećeg prevoza od vaše stanice.\n\n<b>VAŽNO:</b> Nakon šest meseci besplatnog korišćenja, usluga info servisa počela je sa naplatom od 16. septembra 2012. Za korisnike mobilnih mreža Telekom i Vip mobile, cena po jednom upitu iznosi 2,95 din, dok će korisnici Telenora za ovu uslugu izdvajati 3,54 din.\n\nServis prihvata kodove stajališta kao upit i aplikacija pokušava da olakša ovaj proces kako ne biste morali da znate tačne kodove.\n\nKodovi stajališta mogu biti izlistani ili po njihovom nazivu ili po nazivu/broju linije (koje koriste te stanice u odgovarajućem smeru).\n\nDodatno, aplikacija može da prikaže i lokacije stajališta na mapi, zajedno sa vašom lokacijom (koja se pribavlja preko GPS).\n\nStanice mogu biti dodate u listu odabranih za kasnije brže korišćenje. Ova lista se čuva između dva update-a, pa nema bojazni da će se izgubiti (osim ukoliko namerno ne obrišete aplikaciju).\n\nMnoge opcije mogu biti promenjene preko menija Podešavanja na prvom tabu. Slično, dosta funkcija se nalazi i u menijima u drugim tabovima.\n\n<b>IZJAVA O OGRANIČENJU ODGOVORNOSTI (preuzeto sa busplus.rs)</b>\n\nPodaci koje pruža servis za procenu nailaska vozila na stanicu, odnosno udaljenosti vozila od iste, predstavljaju indikativne informacije zasnovane na poslednjem dobijenom statusu vozila u okviru Integrisanog tarifnog sistema javnog prevoza u Beogradu (ITS1 i ITS2) i odgovarajućoj opremi. Pored toga što su preduzete sveobuhvatne mere u cilju dobijanja što preciznijih podataka, odstupanja od stvarne situacije na terenu su moguća usled tehnološko-operativnih ograničenja celokupnog sistema za informisanje putnika. Stoga pružalac usluge ne snosi odgovornost za eventualne posledice koje bi korisnik mogao pretrpeti zbog informacija dobijenih putem ovog servisa.</string>
     <string name="about_donations">Donacije</string>
     <string name="about_donations_text">Aplikacija je bila otvorena za opcione donacije, ali iz razloga apsolutne nezainteresovanosti više nije. Developer će nastaviti da pruža podršku i održava aplikaciju u svoje slobodno vreme.</string>
     <string name="widget">Widget</string>
@@ -87,7 +87,7 @@
     <string name="widget_title">Kredit</string>
     <string name="widget_summary">Podesite kredit na novu vrednost</string>
     <string name="widget_dialog">Podesite kredit na novu vrednost:</string>
-    <string name="widget_help">Za dodavanje widget-a, dugo držite na desktop-u, pa izaberite Widget>BusPlus kredit. Jedan dodir na widget umanjuje vaš kredit za iznos jedne vožnje.\n</string>
+    <string name="widget_help">Za dodavanje widget-a, otvorite launcher i pronađite Widget > BusPlus kredit. Prevucite ikonicu i biće dodat mali (1x1) widget. Jedan dodir na widget umanjuje vaš kredit za iznos jedne vožnje.\n</string>
     <string name="widget_loading">…</string>
     <string name="widget_zone">Tarifna zona</string>
     <string name="widget_zone_summary">Izaberite tarifnu zonu (cenu karte)</string>
@@ -108,5 +108,11 @@
 	<string name="its2_8">ITS2 zona 8 (250)</string>
 	<string name="its2_9">ITS2 zona 9 (275)</string>
 	<string name="its2_10">ITS2 zona 10 (300)</string>
+	<string name="charge_warning">Upozorenje o naplati</string>
+    <string name="charge_warning_summary">Prikaz upozorenja pre svakog upita</string>
+    <string name="warning_hide">Ne prikazuj ponovo ovo upozorenje</string>
+    <string name="warning_title">Upozorenje!</string>
+    <string name="warning_meesage">Usluga BusPlus info servisa će biti naplaćena preko vašeg računa za telefon! Za operatera \"%1$s\" cena je %2$s din po upitu.\n\nDa li ste sigurni da želite da nastavite?</string>
+    <string name="warning_unknown">Usluga BusPlus info servisa će biti naplaćena preko vašeg računa za telefon! Za operatera \"%1$s\" cena je nepoznata (otprilike 4 din po upitu).\n\nDa li ste sigurni da želite da nastavite?</string>
 	
 </resources>

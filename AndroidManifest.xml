@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dvuckovic.busplus"
     android:installLocation="auto"
-    android:versionCode="30"
-    android:versionName="1.9" >
+    android:versionCode="35"
+    android:versionName="1.10.11" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="10" />
+        android:minSdkVersion="11"
+        android:targetSdkVersion="14" />
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -37,11 +37,12 @@
         <activity android:name=".StationActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".LocationMap" />
-        <activity android:name=".FavoritesActivity" >
+        <activity android:name=".FavoritesActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="com.dvuckovic.busplus.CALL_USSD_CODE" />
             </intent-filter>
         </activity>
+        <activity android:name=".FavoritesListActivity" />
         <activity android:name=".EditPreferences" />
         <activity android:name=".InfoActivity" />
         <activity

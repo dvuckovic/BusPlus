@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -143,14 +144,25 @@ public class SearchActivity extends ListActivity {
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 		Cursor cursor = (Cursor) dataSource.getItem(info.position);
 		final int stationId = cursor.getInt(cursor.getColumnIndex("_id"));
-		final String stationName = cursor.getString(cursor.getColumnIndex("name"));
+		final String stationName = cursor.getString(cursor
+				.getColumnIndex("name"));
 
-		menu.setHeaderTitle("["+Integer.toString(stationId)+"] "+stationName);
+		menu.setHeaderTitle("[" + Integer.toString(stationId) + "] "
+				+ stationName);
 
 		// Add to favorites context menu
 		menu.add(0, 0, 1, getString(R.string.add_to_favorites))
 				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					public boolean onMenuItemClick(MenuItem item) {
+						AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+								.getMenuInfo();
+						Cursor cursor = (Cursor) dataSource
+								.getItem(info.position);
+						int stationId = cursor.getInt(cursor
+								.getColumnIndex("_id"));
+						String stationName = cursor.getString(cursor
+								.getColumnIndex("name"));
+
 						// Insert station to favorites and toast a message
 						String suffix = "";
 						if (!lineSummary.equals(""))
@@ -168,9 +180,19 @@ public class SearchActivity extends ListActivity {
 		menu.add(0, 1, 3, getString(R.string.query))
 				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					public boolean onMenuItemClick(MenuItem item) {
+						AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+								.getMenuInfo();
+						Cursor cursor = (Cursor) dataSource
+								.getItem(info.position);
+						String stationCode = cursor.getString(cursor
+								.getColumnIndex("_id"));
+
 						// USSD query of station code
-						BusPlus bp = (BusPlus) getApplicationContext();
-						bp.callUSSDCode(Integer.toString(stationId));
+						Intent i = new Intent(SearchActivity.this,
+								FavoritesActivity.class);
+						i.putExtra(FavoritesActivity.EXTRA_ID, stationCode);
+						i.setAction(FavoritesActivity.INTENT_NAME);
+						startActivity(i);
 						return true;
 					}
 				});
@@ -179,6 +201,15 @@ public class SearchActivity extends ListActivity {
 		menu.add(0, 2, 2, getString(R.string.launcher_shortcut))
 				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					public boolean onMenuItemClick(MenuItem item) {
+						AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+								.getMenuInfo();
+						Cursor cursor = (Cursor) dataSource
+								.getItem(info.position);
+						String stationCode = cursor.getString(cursor
+								.getColumnIndex("_id"));
+						String stationName = cursor.getString(cursor
+								.getColumnIndex("name"));
+
 						// Create shortcut on home launcher
 						String suffix = "";
 						if (!lineSummary.equals(""))
@@ -186,7 +217,7 @@ public class SearchActivity extends ListActivity {
 									+ lineSummary.replaceAll("\\s+/.*?/", "")
 									+ ")";
 						BusPlus bp = (BusPlus) getApplicationContext();
-						bp.setupShortcut(Integer.toString(stationId), stationName + suffix);
+						bp.setupShortcut(stationCode, stationName + suffix);
 						return true;
 					}
 				});
@@ -203,13 +234,15 @@ public class SearchActivity extends ListActivity {
 
 		// USSD query of station pressed
 		if (!stationCode.equals("")) {
-			BusPlus bp = (BusPlus) getApplicationContext();
-			bp.callUSSDCode(stationCode);
+			Intent i = new Intent(SearchActivity.this, FavoritesActivity.class);
+			i.putExtra(FavoritesActivity.EXTRA_ID, stationCode);
+			i.setAction(FavoritesActivity.INTENT_NAME);
+			startActivity(i);
 		}
 
 		// Close this activity and return to previous, our work here is probably
 		// done
-		finish();
+		// finish();
 	}
 
 	/**

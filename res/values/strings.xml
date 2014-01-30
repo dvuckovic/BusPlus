@@ -29,12 +29,12 @@
     <string name="launcher_shortcut">Add launcher shortcut</string>
     <string name="shortcut">Shortcut</string>
     <string name="no_favorites">No Favorites yet!</string>
-    <string name="help_favorites">Add some using Menu > Add, Menu > Add from list, or via long press in results under Station > Search.</string>
+    <string name="help_favorites">Add some using menu Add, List, Line or via long press in results under Station > Search.</string>
     <string name="add_to_favorites">Add to Favorites</string>
-    <string name="add">Add manually</string>
-    <string name="add_from_list">Add from list</string>
-    <string name="add_from_line">Add from line</string>
-    <string name="clear_favorites">Clear Favorites</string>
+    <string name="add">Add</string>
+    <string name="add_from_list">List</string>
+    <string name="add_from_line">Line</string>
+    <string name="clear_favorites">Clear</string>
     <string name="cancel">Cancel</string>
     <string name="blank_station_code">Please enter a station code!</string>
     <string name="blank_station_name">Please enter a station name!</string>
@@ -43,10 +43,10 @@
     <string name="no">No</string>
     <string name="choose_station">Choose a station</string>
     <string name="current_location">Current location</string>
-    <string name="center_location">Center location</string>
-    <string name="show_nearby">Show nearby</string>
-    <string name="show_line">Show from line</string>
-    <string name="show_view">Show all</string>
+    <string name="center_location">Location</string>
+    <string name="show_nearby">Nearby</string>
+    <string name="show_line">Line</string>
+    <string name="show_view">All</string>
     <string name="general">General</string>
     <string name="map">Map</string>
     <string name="shortcuts">Shortcuts</string>
@@ -80,7 +80,7 @@
     <string name="help_shortcut_color">Shortcut icon color</string>
     <string name="help_shortcut_color_text">You can change the color of the icon for your home launcher shortcuts. Go to Settings and check Custom icon color. Then set the icon hue using the seek bar. To reset the hue, tap on icon preview.\n\nNow, each new shortcut will use the set icon color. To change it again, go to the settings and change the hue. To reset it, uncheck the Custom icon color.</string>
     <string name="about">About app</string>
-    <string name="about_text">BusPlus is unofficial Android app that simplifies the use of the BusPlus (mass transit system in Belgrade) USSD service that shows how far is the next bus from your station.\n\nService takes station codes as an input, and app tries to streamline this so you can query the service without the knowledge of correct code.\n\nStation codes can be listed either by their names or line numbers (which use said stations along their route).\n\nAdditionally, app can plot station positions on a map, along with your current location (retrieved from GPS).\n\nStations can be added to Favorites list for a much quicker later use. This list is persisted across the updates, so there is no fear it will be lost (unless you deliberately uninstall it).\n\nMany options can be changed under Settings menu on first tab. Similarly, much of the functionality is under option menus on each tab.</string>
+    <string name="about_text">BusPlus is <b>unofficial</b> Android app that simplifies the use of the BusPlus (mass transit system in Belgrade) USSD service that shows how far is the next bus from your station.\n\n<b>IMPORTANT:</b> After six months of free use, charging has begun for this USSD info service, starting with September 16th 2012. For users of Telekom and Vip mobile networks, rate is 2,95 RSD per query, while users of Telenor network will have to pay 3,54 RSD.\n\nService takes station codes as an input, and app tries to streamline this so you can query the service without the knowledge of correct code.\n\nStation codes can be listed either by their names or line numbers (which use said stations along their route).\n\nAdditionally, app can plot station positions on a map, along with your current location (retrieved from GPS).\n\nStations can be added to Favorites list for a much quicker later use. This list is persisted across the updates, so there is no fear it will be lost (unless you deliberately uninstall it).\n\nMany options can be changed under Settings menu on first tab. Similarly, much of the functionality is under option menus on each tab.\n\n<b>GENERIC WAIVER OF LIABILITY (from busplus.rs)</b>\n\nData which info service provide for estimated arrival time of vehicle to the station, or distance of vehicle from it, represent indicated information based on last known status of the vehicle in the mass transit system of Belgrade (ITS1 and ITS2) and used equipment. While there have been extensive measures taken in order to provide the most accurate information, real world deviations are still possible because of tehnical and operational limitations of the system. Provider will not be held accountable for consequences one might suffer because of information obtained using the service.</string>
     <string name="about_donations">Donations</string>
     <string name="about_donations_text">This app was open to optional donations, but because of absolute lack of interest it isn\'t anymore. Developer will continue to support and update the app in his free time.</string>
     <string name="widget">Widget</string>
@@ -88,7 +88,7 @@
     <string name="widget_title">Balance</string>
     <string name="widget_summary">Set your balance to new value</string>
     <string name="widget_dialog">Set your balance to new value:</string>
-    <string name="widget_help">To add a widget, long press on your home screen and choose Widget>BusPlus Balance. One tap on widget reduces your balance by a single ticket fare.</string>
+    <string name="widget_help">To add a widget, long press on your home screen and choose Widget>BusPlus Balance. One tap on widget reduces your balance by a single ticket fare.\n</string>
     <string name="widget_loading">…</string>
     <string name="widget_zone">Tariff zone</string>
     <string name="widget_zone_summary">Choose tariff zone (ticket fare)</string>
@@ -109,6 +109,12 @@
     <string name="its2_8">ITS2 zone 8 (250)</string>
     <string name="its2_9">ITS2 zone 9 (275)</string>
     <string name="its2_10">ITS2 zone 10 (300)</string>
+    <string name="charge_warning">Charge warning</string>
+    <string name="charge_warning_summary">Show warning before each request</string>
+    <string name="warning_hide">Do not show again</string>
+    <string name="warning_title">Warning!</string>
+    <string name="warning_meesage">The following USSD query will charge your phone bill! For carrier \"%1$s\" rate is %2$s RSD per query.\n\nAre you sure you want to continue?</string>
+    <string name="warning_unknown">The following USSD query will charge your phone bill! For carrier \"%1$s\" rate is unknown (approximately 4 RSD per query).\n\nAre you sure you want to continue?</string>
 
     <!-- Joint strings -->
     <string name="ok">OK</string>

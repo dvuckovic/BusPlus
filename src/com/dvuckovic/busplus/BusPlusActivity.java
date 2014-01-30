@@ -5,13 +5,16 @@ import java.io.IOException;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.TabHost;
 
 /** Main app activity responsible for drawing Tab control and content for tabs **/
+@SuppressWarnings("deprecation")
 public class BusPlusActivity extends TabActivity {
 
 	static TabHost tabHost;
@@ -61,7 +64,6 @@ public class BusPlusActivity extends TabActivity {
 		}
 
 		// Setup tab contents using different activities
-		Resources res = getResources();
 		tabHost = getTabHost();
 		TabHost.TabSpec spec;
 		Intent intent;
@@ -69,24 +71,21 @@ public class BusPlusActivity extends TabActivity {
 		intent = new Intent().setClass(this, StationActivity.class);
 		spec = tabHost
 				.newTabSpec("station")
-				.setIndicator(getString(R.string.station),
-						res.getDrawable(R.drawable.ic_tab_station))
+				.setIndicator(getString(R.string.station))
 				.setContent(intent);
 		tabHost.addTab(spec);
 
 		intent = new Intent().setClass(this, LocationMap.class);
 		spec = tabHost
 				.newTabSpec("location")
-				.setIndicator(getString(R.string.location),
-						res.getDrawable(R.drawable.ic_tab_location))
+				.setIndicator(getString(R.string.location))
 				.setContent(intent);
 		tabHost.addTab(spec);
 
-		intent = new Intent().setClass(this, FavoritesActivity.class);
+		intent = new Intent().setClass(this, FavoritesListActivity.class);
 		spec = tabHost
 				.newTabSpec("favorites")
-				.setIndicator(getString(R.string.favorites),
-						res.getDrawable(R.drawable.ic_tab_favorites))
+				.setIndicator(getString(R.string.favorites))
 				.setContent(intent);
 		tabHost.addTab(spec);
 
@@ -119,6 +118,32 @@ public class BusPlusActivity extends TabActivity {
 		super.onResume();
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(R.string.preferences).setOnMenuItemClickListener(
+				new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						startActivity(new Intent(getBaseContext(),
+								EditPreferences.class));
+
+						return true;
+					}
+				});
+
+		menu.add(R.string.info).setOnMenuItemClickListener(
+				new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						startActivity(new Intent(getBaseContext(),
+								InfoActivity.class));
+
+						return true;
+					}
+				});
+		return super.onCreateOptionsMenu(menu);
+	}
+	
 	/** Listens for pref changes and sets variable if language has changed **/
 	private SharedPreferences.OnSharedPreferenceChangeListener prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
 		public void onSharedPreferenceChanged(
