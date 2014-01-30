@@ -1,11 +1,11 @@
 BusPlus
 ======
 
-<img align="left" src="http://www.dvuckovic.com/sites/default/files/projects/icons/busplus.png" style="padding-right:10px;"/> BusPlus is a small Android app for mass transit system in Belgrade that shows how far is the next bus from your station. As my first full app I used it to teach myself several things about development for Android OS.
+<img align="left" src="http://www.dvuckovic.com/sites/default/files/projects/icons/busplus.png" border="10"/> BusPlus is a small Android app for mass transit system in Belgrade that shows how far is the next bus from your station. As my first full app I used it to teach myself several things about development for Android OS.
 
 Coding for Android is relatively easy and I found all the necessary help by reading various Q&A at [Stack Overflow](http://stackoverflow.com) and by using [this nice book](http://commonsware.com/AdvAndroid/) as a reference. Web is full of examples and tutorials on everything Android, and if you have some idea of what you need you will probably find it.
 
-[![Screenshot #1](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-1_thumb.jpg "Screenshot #1")](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-1.jpg) [![Screenshot #2](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-2_thumb.jpg "Screenshot #2")](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-2.jpg) [![Screenshot #3](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-3_thumb.jpg "Screenshot #3")](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-3.jpg) [![Screenshot #4](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-4_thumb.jpg "Screenshot #4")](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-4.jpg) [![Screenshot #5](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-5_thumb.jpg "Screenshot #5")](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-5.jpg) [![Screenshot #6](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-6_thumb.jpg "Screenshot #6")](http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-6.jpg) 
+<a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-1.jpg" target="_blank" title="Screenshot #1"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-1_thumb.jpg" alt="Screenshot #1" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-2.jpg" target="_blank" title="Screenshot #2"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-2_thumb.jpg" alt="Screenshot #2" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-3.jpg" target="_blank" title="Screenshot #3"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-3_thumb.jpg" alt="Screenshot #3" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-4.jpg" target="_blank" title="Screenshot #4"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-4_thumb.jpg" alt="Screenshot #4" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-5.jpg" target="_blank" title="Screenshot #5"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-5_thumb.jpg" alt="Screenshot #5" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-6.jpg" target="_blank" title="Screenshot #6"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-6_thumb.jpg" alt="Screenshot #6" border="0"/></a>
 
 BusPlus system
 ------
@@ -69,7 +69,7 @@ License
 ------
 Source code is released under [WTFPL license](http://sam.zoy.org/wtfpl/).
 
-> Note: Since this app use Google Maps MapView, you will need your own API key (change it in map.xml layout file).
+> Note: Since this app use Google Maps MapView, you will need your own API key (change it in `map.xml` layout file).
 
 
     <?xml version="1.0" encoding="utf-8"?>
