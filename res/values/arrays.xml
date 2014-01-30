@@ -50,18 +50,18 @@
         <item>@string/its2_10</item>
     </string-array>
     <string-array name="zone_fares">
-        <item>60</item>
-        <item>95</item>
-        <item>80</item>
-        <item>100</item>
-        <item>125</item>
+        <item>72</item>
+        <item>114</item>
+        <item>96</item>
+        <item>120</item>
         <item>150</item>
-        <item>175</item>
-        <item>200</item>
-        <item>225</item>
-        <item>250</item>
-        <item>275</item>
+        <item>180</item>
+        <item>210</item>
+        <item>240</item>
+        <item>270</item>
         <item>300</item>
+        <item>330</item>
+        <item>360</item>
     </string-array>
     <string-array name="widget_types">
         <item>@string/widget_type1</item>
@@ -84,9 +84,9 @@
         <item>22005</item>
     </string-array>
     <string-array name="carrier_rates">
-        <item>1,77</item>
-        <item>1,77</item>
-        <item>1,77</item>
+        <item>1,80</item>
+        <item>1,80</item>
+        <item>1,80</item>
     </string-array>
 
 </resources>

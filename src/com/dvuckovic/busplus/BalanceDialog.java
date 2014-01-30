@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 /** Dialog activity to quickly edit balance value from widget **/
 public class BalanceDialog extends Activity {
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,7 +40,10 @@ public class BalanceDialog extends Activity {
 		Button cancelBtn = (Button) findViewById(R.id.cancelButton);
 
 		// Set box to current balance (from settings)
-		balanceTxt.setText(prefs.getString("widget_balance", "600"));
+		balanceTxt.setText(prefs.getString(
+				"widget_balance",
+				String.valueOf(Integer.parseInt(getResources().getStringArray(
+						R.array.zone_fares)[0]) * 10)));
 
 		// Set up on click listener for OK button
 		okBtn.setOnClickListener(new OnClickListener() {

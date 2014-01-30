@@ -35,7 +35,8 @@ public class BalanceWidget extends AppWidgetProvider {
 				.getDefaultSharedPreferences(context);
 
 		// Get ticket fare from preferences
-		int ticketFare = Integer.parseInt(prefs.getString("widget_zone", "60"));
+		int ticketFare = Integer.parseInt(prefs.getString("widget_zone",
+				context.getResources().getStringArray(R.array.zone_fares)[0]));
 
 		// Resolve widget style from preferences
 		switch (Integer.parseInt(prefs.getString("widget_type", "1"))) {
@@ -54,8 +55,9 @@ public class BalanceWidget extends AppWidgetProvider {
 		}
 
 		// Get balance from preferences
-		int balance = Integer
-				.parseInt(prefs.getString("widget_balance", "600"));
+		int balance = Integer.parseInt(prefs.getString("widget_balance", String
+				.valueOf(Integer.parseInt(context.getResources()
+						.getStringArray(R.array.zone_fares)[0]) * 10)));
 
 		// Check if the update was requested by a tap
 		if (clicked) {

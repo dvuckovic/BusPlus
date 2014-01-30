@@ -71,7 +71,7 @@
         android:key="category_widget"
         android:title="@string/widget" >
         <EditTextPreference
-            android:defaultValue="600"
+            android:defaultValue="720"
             android:dialogMessage="@string/widget_help"
             android:digits="1234567890"
             android:hint="@string/widget_title"
@@ -82,7 +82,7 @@
             android:title="@string/widget_title" />
 
         <ListPreference
-            android:defaultValue="60"
+            android:defaultValue="72"
             android:dialogTitle="@string/widget_zone"
             android:entries="@array/zones"
             android:entryValues="@array/zone_fares"
