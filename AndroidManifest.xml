@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dvuckovic.busplus"
     android:installLocation="auto"
+<<<<<<< HEAD
     android:versionCode="43"
     android:versionName="1.12.11" >
+=======
+    android:versionCode="39"
+    android:versionName="1.11.11" >
+>>>>>>> 9a5a1c7e5cc464b10ee9178d50e4b87146999f0f
 
     <uses-sdk
         android:minSdkVersion="11"

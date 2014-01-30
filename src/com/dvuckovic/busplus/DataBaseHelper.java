@@ -20,7 +20,11 @@ import android.util.Log;
 /** SQLite database worker with predefined methods **/
 public class DataBaseHelper extends SQLiteOpenHelper {
 
+<<<<<<< HEAD
 	private static final int SCHEMA_VERSION = 11;
+=======
+	private static final int SCHEMA_VERSION = 10;
+>>>>>>> 9a5a1c7e5cc464b10ee9178d50e4b87146999f0f
 	private static String DB_PATH = "/data/data/com.dvuckovic.busplus/databases/";
 	private static String DB_NAME = "busplus.db";
 	private SQLiteDatabase myDataBase;
