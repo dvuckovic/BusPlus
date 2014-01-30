@@ -78,5 +78,15 @@
         <item>@drawable/widget_type2</item>
         <item>@drawable/widget_type3</item>
     </string-array>
+	<string-array name="carrier_codes">
+        <item>22001</item>
+        <item>22003</item>
+        <item>22005</item>
+    </string-array>
+    <string-array name="carrier_rates">
+        <item>3,54</item>
+        <item>2,95</item>
+        <item>2,95</item>
+    </string-array>
 
 </resources>

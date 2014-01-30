@@ -14,7 +14,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -41,20 +40,6 @@ public class BusPlus extends Application {
 		// Call the setLanguage method
 		setLanguage(prefs.getString("language", "sr"));
 
-	}
-
-	/**
-	 * Executes USSD query using a station code as input by calling Intent on
-	 * system call app
-	 * 
-	 * @param stationCode
-	 **/
-	public void callUSSDCode(String stationCode) {
-		String ussd = "*011*" + stationCode + Uri.encode("#");
-		Intent i = new Intent(android.content.Intent.ACTION_CALL,
-				Uri.parse("tel:" + ussd));
-		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(i);
 	}
 
 	/**

@@ -11,11 +11,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -38,6 +37,7 @@ public class StationActivity extends Activity {
 	private EditText stationNameTxt;
 	private EditText lineNameTxt;
 	private static final String fields[] = { "name", "desc" };
+	private Button clearBtn;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,6 +52,30 @@ public class StationActivity extends Activity {
 		stationNameTxt = (EditText) findViewById(R.id.searchText);
 		lineNameTxt = (EditText) findViewById(R.id.lineSearchText);
 
+		stationCodeTxt.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				setClearBtn();
+				return false;
+			}
+		});
+
+		stationNameTxt.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				setClearBtn();
+				return false;
+			}
+		});
+
+		lineNameTxt.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				setClearBtn();
+				return false;
+			}
+		});
+
 		Button executeBtn = (Button) findViewById(R.id.executeButton);
 
 		// Listen for clicks on execute button
@@ -64,8 +88,11 @@ public class StationActivity extends Activity {
 							getString(R.string.empty_station_code));
 				} else {
 					// USSD query for entered code
-					BusPlus bp = (BusPlus) getApplicationContext();
-					bp.callUSSDCode(stationCode);
+					Intent i = new Intent(StationActivity.this,
+							FavoritesActivity.class);
+					i.putExtra(FavoritesActivity.EXTRA_ID, stationCode);
+					i.setAction(FavoritesActivity.INTENT_NAME);
+					startActivity(i);
 				}
 			}
 		});
@@ -154,7 +181,7 @@ public class StationActivity extends Activity {
 									.setMessage(
 											"(A) " + lineDescA + "\n\n"
 													+ "(B) " + lineDescB)
-									.setPositiveButton(
+									.setNegativeButton(
 											"A",
 											new DialogInterface.OnClickListener() {
 												public void onClick(
@@ -185,7 +212,7 @@ public class StationActivity extends Activity {
 
 												}
 											})
-									.setNegativeButton(
+									.setPositiveButton(
 											"B",
 											new DialogInterface.OnClickListener() {
 												public void onClick(
@@ -235,6 +262,36 @@ public class StationActivity extends Activity {
 			}
 		});
 
+		clearBtn = (Button) findViewById(R.id.clearButton);
+		clearBtn.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				// Clear text fields
+				stationCodeTxt.setText("");
+				stationNameTxt.setText("");
+				lineNameTxt.setText("");
+				setClearBtn();
+			}
+		});
+
+		setClearBtn();
+
+		Button prefBtn = (Button) findViewById(R.id.preferencesButton);
+		prefBtn.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				// Start preferences activity
+				startActivity(new Intent(getBaseContext(),
+						EditPreferences.class));
+			}
+		});
+
+		Button aboutBtn = (Button) findViewById(R.id.aboutButton);
+		aboutBtn.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				// Start preferences activity
+				startActivity(new Intent(getBaseContext(), InfoActivity.class));
+			}
+		});
+
 	}
 
 	@Override
@@ -257,35 +314,17 @@ public class StationActivity extends Activity {
 		lineNameTxt.setText(state.getString("line_name"));
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Instantiate Application class and call the setLanguage method
-		BusPlus bp = (BusPlus) getApplicationContext();
-		bp.setLanguage(prefs.getString("language", "sr"));
-
-		new MenuInflater(this).inflate(R.menu.option, menu);
-
-		return (super.onCreateOptionsMenu(menu));
-	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.clear) {
-			// Clear text fields
-			stationCodeTxt.setText("");
-			stationNameTxt.setText("");
-			lineNameTxt.setText("");
-			return true;
-		} else if (item.getItemId() == R.id.prefs) {
-			// Start preferences activity
-			startActivity(new Intent(this, EditPreferences.class));
-			return true;
-		} else if (item.getItemId() == R.id.info) {
-			// Start info activity
-			startActivity(new Intent(this, InfoActivity.class));
-			return true;
-		}
-		return (super.onOptionsItemSelected(item));
+	private void setClearBtn() {
+		if (stationCodeTxt.getText().toString().isEmpty()) {
+			if (stationNameTxt.getText().toString().isEmpty()) {
+				if (lineNameTxt.getText().toString().isEmpty())
+					clearBtn.setEnabled(false);
+				else
+					clearBtn.setEnabled(true);
+			} else
+				clearBtn.setEnabled(true);
+		} else
+			clearBtn.setEnabled(true);
 	}
 
 	/**

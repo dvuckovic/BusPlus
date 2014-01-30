@@ -13,6 +13,11 @@
             android:key="language"
             android:summary="@string/interface_language"
             android:title="@string/language" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="show_warning"
+            android:summary="@string/charge_warning_summary"
+            android:title="@string/charge_warning" />
         <ListPreference
             android:defaultValue="1"
             android:dialogTitle="@string/tabs_position"

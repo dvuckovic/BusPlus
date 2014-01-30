@@ -8,13 +8,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+
+
         android:paddingTop="12dp" >
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" >
 
             <EditText
                 android:id="@+id/stationCode"
@@ -47,7 +49,9 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" >
 
             <EditText
                 android:id="@+id/searchText"
@@ -76,7 +80,9 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" >
 
             <EditText
                 android:id="@+id/lineSearchText"
@@ -94,6 +100,57 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/search" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_gray"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/clearButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_menu_button"
+                    android:padding="15dp"
+                    android:text="@string/clear"
+                    android:textAllCaps="true"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/preferencesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_menu_button"
+                    android:padding="15dp"
+                    android:text="@string/preferences"
+                    android:textAllCaps="true"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/aboutButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_menu_button"
+                    android:padding="15dp"
+                    android:text="@string/info"
+                    android:textAllCaps="true"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

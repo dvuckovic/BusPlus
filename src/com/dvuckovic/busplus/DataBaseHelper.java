@@ -20,7 +20,7 @@ import android.util.Log;
 /** SQLite database worker with predefined methods **/
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-	private static final int SCHEMA_VERSION = 9;
+	private static final int SCHEMA_VERSION = 10;
 	private static String DB_PATH = "/data/data/com.dvuckovic.busplus/databases/";
 	private static String DB_NAME = "busplus.db";
 	private SQLiteDatabase myDataBase;
@@ -270,6 +270,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * Returns all records from the Favorites table
 	 * 
+	 * @param sortBy
+	 *
 	 * @return Cursor with results
 	 **/
 	public Cursor getFavorites(int sortBy) {

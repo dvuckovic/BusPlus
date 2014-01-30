@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -20,14 +21,12 @@ import android.preference.PreferenceManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -44,9 +43,9 @@ import com.google.android.maps.OverlayItem;
 public class LocationMap extends MapActivity implements LocationListener,
 		OnGestureListener, OnDoubleTapListener {
 
-	final static boolean ENABLED_ONLY = true;
-	final static int UPDATE_LOCATION = 2;
-	final static int NO_PROVIDER = 3;
+	//private final static boolean ENABLED_ONLY = true;
+	private final static int UPDATE_LOCATION = 2;
+	//private final static int NO_PROVIDER = 3;
 	private SharedPreferences prefs;
 	private MyMapView mapView;
 	private LocationManager mLocationManager;
@@ -99,6 +98,42 @@ public class LocationMap extends MapActivity implements LocationListener,
 		// Set Satellite view on our map, if the preference has been set
 		mapView.setSatellite(prefs.getBoolean("map_satellite", false));
 
+		Button centerBtn = (Button) findViewById(R.id.centerButton);
+		centerBtn.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				// Center location
+				centerLocation(noProvider);
+				centered = true;
+			}
+		});
+
+		Button nearbyBtn = (Button) findViewById(R.id.nearbyButton);
+		nearbyBtn.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				// Draw nearby stations
+				lineSummary = "";
+				drawNearbyMarkers();
+			}
+		});
+
+		Button lineBtn = (Button) findViewById(R.id.lineButton);
+		lineBtn.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				// Show lines dialog
+				showLines();
+			}
+		});
+
+		Button viewBtn = (Button) findViewById(R.id.viewButton);
+		viewBtn.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				// Draw all stations in view
+				all = true;
+				lineSummary = "";
+				drawViewMarkers();
+			}
+		});
+		
 		// Get the best location provider and start location thread
 		initializeLocationAndStartGpsThread();
 	}
@@ -145,42 +180,6 @@ public class LocationMap extends MapActivity implements LocationListener,
 		setCurrentGpsLocation(null);
 		mThread = new Thread(new MyThreadRunner());
 		mThread.start();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Instantiate preference manager
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-		// Instantiate Application class and call the setLanguage method
-		BusPlus bp = (BusPlus) getApplicationContext();
-		bp.setLanguage(prefs.getString("language", "sr"));
-
-		new MenuInflater(this).inflate(R.menu.option_map, menu);
-
-		return (super.onCreateOptionsMenu(menu));
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		// React to different menu options
-		if (item.getItemId() == R.id.centerLocation) {
-			centerLocation(noProvider);
-			centered = true;
-		} else if (item.getItemId() == R.id.showNearby) {
-			lineSummary = "";
-			drawNearbyMarkers();
-		} else if (item.getItemId() == R.id.showLine) {
-			showLines();
-		} else if (item.getItemId() == R.id.showView) {
-			all = true;
-			lineSummary = "";
-			drawViewMarkers();
-		}
-
-		return (super.onOptionsItemSelected(item));
 	}
 
 	@Override
@@ -328,7 +327,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 			c.moveToFirst();
 			while (c.isAfterLast() == false) {
 				Drawable marker = getResources().getDrawable(
-						R.drawable.little_bus);
+						R.drawable.pin);
 				marker.setBounds(0, 0, marker.getIntrinsicWidth(),
 						marker.getIntrinsicHeight());
 				String id = c.getString(c.getColumnIndex("_id"));
@@ -415,7 +414,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 						.setMessage(
 								"(A) " + lineDescA + "\n\n" + "(B) "
 										+ lineDescB)
-						.setPositiveButton("A",
+						.setNegativeButton("A",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
@@ -430,7 +429,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 										drawLineMarkers(lineId, "A");
 									}
 								})
-						.setNegativeButton("B",
+						.setPositiveButton("B",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
@@ -475,7 +474,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 
 			while (c.isAfterLast() == false) {
 				Drawable marker = getResources().getDrawable(
-						R.drawable.little_bus);
+						R.drawable.pin);
 				marker.setBounds(0, 0, marker.getIntrinsicWidth(),
 						marker.getIntrinsicHeight());
 				String id = c.getString(c.getColumnIndex("_id"));
@@ -532,7 +531,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 			c.moveToFirst();
 			while (c.isAfterLast() == false) {
 				Drawable marker = getResources().getDrawable(
-						R.drawable.little_bus);
+						R.drawable.pin);
 				marker.setBounds(0, 0, marker.getIntrinsicWidth(),
 						marker.getIntrinsicHeight());
 				String id = c.getString(c.getColumnIndex("_id"));
@@ -650,13 +649,17 @@ public class LocationMap extends MapActivity implements LocationListener,
 				tapName = item.getTitle();
 				builder.setTitle(getString(R.string.station))
 						.setMessage(tapName + " (" + tapCode + ")")
-						.setPositiveButton(getString(R.string.query),
+						.setNegativeButton(getString(R.string.query),
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
 										// USSD query
-										BusPlus bp = (BusPlus) getApplicationContext();
-										bp.callUSSDCode(tapCode);
+										Intent i = new Intent(LocationMap.this,
+												FavoritesActivity.class);
+										i.putExtra(FavoritesActivity.EXTRA_ID,
+												tapCode);
+										i.setAction(FavoritesActivity.INTENT_NAME);
+										startActivity(i);
 										dialog.dismiss();
 									}
 								})
@@ -679,7 +682,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 										bp.showToastMessage(getString(R.string.favorite_added_to_list));
 									}
 								})
-						.setNegativeButton(getString(R.string.shortcut),
+						.setPositiveButton(getString(R.string.shortcut),
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
