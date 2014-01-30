@@ -79,11 +79,7 @@
     <string name="help_shortcut_color">Boja ikonice</string>
     <string name="help_shortcut_color_text">Možete promeniti boju ikonice za prečice na desktop-u. Idite u Podešavanja i uključite Boja ikonice. Onda podesite ton ikonice pomeranjem podešavanja ispod. Za vraćanje početne nijanse, dodirnite ikonicu levo.\n\nSada će svaka nova prečica koristiti postavljenu boju ikonice. Za novu promenu, idite u podešavanja i promenite nijansu. Za isključivanje ove opcije, isključite Boja ikonice.</string>
     <string name="about">O aplikaciji</string>
-<<<<<<< HEAD
     <string name="about_text">BusPlus je <b>nezvanična</b> Android aplikacija koja pojednostavljuje korišćenje Bus Plus USSD info servisa za javljanje podataka o udaljenosti sledećeg prevoza od vaše stanice.\n\n<b>VAŽNO:</b> Nakon šest meseci besplatnog korišćenja, usluga info servisa počela je sa naplatom od 16. septembra 2012. Za korisnike mobilnih mreža Telekom, Vip mobile i Telenor cena po jednom upitu iznosi 1,80 din.\n\nServis prihvata kodove stajališta kao upit i aplikacija pokušava da olakša ovaj proces kako ne biste morali da znate tačne kodove.\n\nKodovi stajališta mogu biti izlistani ili po njihovom nazivu ili po nazivu/broju linije (koje koriste te stanice u odgovarajućem smeru).\n\nDodatno, aplikacija može da prikaže i lokacije stajališta na mapi, zajedno sa vašom lokacijom (koja se pribavlja preko GPS).\n\nStanice mogu biti dodate u listu odabranih za kasnije brže korišćenje. Ova lista se čuva između dva update-a, pa nema bojazni da će se izgubiti (osim ukoliko namerno ne obrišete aplikaciju).\n\nMnoge opcije mogu biti promenjene preko menija Podešavanja na prvom tabu. Slično, dosta funkcija se nalazi i u menijima u drugim tabovima.\n\n<b>IZJAVA O OGRANIČENJU ODGOVORNOSTI (preuzeto sa busplus.rs)</b>\n\nPodaci koje pruža servis za procenu nailaska vozila na stanicu, odnosno udaljenosti vozila od iste, predstavljaju indikativne informacije zasnovane na poslednjem dobijenom statusu vozila u okviru Integrisanog tarifnog sistema javnog prevoza u Beogradu (ITS1 i ITS2) i odgovarajućoj opremi. Pored toga što su preduzete sveobuhvatne mere u cilju dobijanja što preciznijih podataka, odstupanja od stvarne situacije na terenu su moguća usled tehnološko-operativnih ograničenja celokupnog sistema za informisanje putnika. Stoga pružalac usluge ne snosi odgovornost za eventualne posledice koje bi korisnik mogao pretrpeti zbog informacija dobijenih putem ovog servisa.</string>
-=======
-    <string name="about_text">BusPlus je <b>nezvanična</b> Android aplikacija koja pojednostavljuje korišćenje Bus Plus USSD info servisa za javljanje podataka o udaljenosti sledećeg prevoza od vaše stanice.\n\n<b>VAŽNO:</b> Nakon šest meseci besplatnog korišćenja, usluga info servisa počela je sa naplatom od 16. septembra 2012. Za korisnike mobilnih mreža Telekom, Vip mobile i Telenor cena po jednom upitu iznosi 1,77 din.\n\nServis prihvata kodove stajališta kao upit i aplikacija pokušava da olakša ovaj proces kako ne biste morali da znate tačne kodove.\n\nKodovi stajališta mogu biti izlistani ili po njihovom nazivu ili po nazivu/broju linije (koje koriste te stanice u odgovarajućem smeru).\n\nDodatno, aplikacija može da prikaže i lokacije stajališta na mapi, zajedno sa vašom lokacijom (koja se pribavlja preko GPS).\n\nStanice mogu biti dodate u listu odabranih za kasnije brže korišćenje. Ova lista se čuva između dva update-a, pa nema bojazni da će se izgubiti (osim ukoliko namerno ne obrišete aplikaciju).\n\nMnoge opcije mogu biti promenjene preko menija Podešavanja na prvom tabu. Slično, dosta funkcija se nalazi i u menijima u drugim tabovima.\n\n<b>IZJAVA O OGRANIČENJU ODGOVORNOSTI (preuzeto sa busplus.rs)</b>\n\nPodaci koje pruža servis za procenu nailaska vozila na stanicu, odnosno udaljenosti vozila od iste, predstavljaju indikativne informacije zasnovane na poslednjem dobijenom statusu vozila u okviru Integrisanog tarifnog sistema javnog prevoza u Beogradu (ITS1 i ITS2) i odgovarajućoj opremi. Pored toga što su preduzete sveobuhvatne mere u cilju dobijanja što preciznijih podataka, odstupanja od stvarne situacije na terenu su moguća usled tehnološko-operativnih ograničenja celokupnog sistema za informisanje putnika. Stoga pružalac usluge ne snosi odgovornost za eventualne posledice koje bi korisnik mogao pretrpeti zbog informacija dobijenih putem ovog servisa.</string>
->>>>>>> 9a5a1c7e5cc464b10ee9178d50e4b87146999f0f
     <string name="about_donations">Donacije</string>
     <string name="about_donations_text">Aplikacija je bila otvorena za opcione donacije, ali iz razloga apsolutne nezainteresovanosti više nije. Developer će nastaviti da pruža podršku i održava aplikaciju u svoje slobodno vreme.</string>
     <string name="widget">Widget</string>
@@ -100,7 +96,6 @@
     <string name="widget_type1">Stil 1</string>
     <string name="widget_type2">Stil 2</string>
     <string name="widget_type3">Stil 3</string>
-<<<<<<< HEAD
     <string name="its1_1">ITS1 zona 1 ili 2 (72)</string>
     <string name="its1_2">ITS1 zona 1 i 2 (114)</string>
     <string name="its2_1">ITS2 zona 1 (96)</string>
@@ -113,20 +108,6 @@
     <string name="its2_8">ITS2 zona 8 (300)</string>
     <string name="its2_9">ITS2 zona 9 (330)</string>
     <string name="its2_10">ITS2 zona 10 (360)</string>
-=======
-    <string name="its1_1">ITS1 zona 1 ili 2 (60)</string>
-    <string name="its1_2">ITS1 zona 1 i 2 (95)</string>
-	<string name="its2_1">ITS2 zona 1 (80)</string>
-	<string name="its2_2">ITS2 zona 2 (100)</string>
-	<string name="its2_3">ITS2 zona 3 (125)</string>
-	<string name="its2_4">ITS2 zona 4 (150)</string>
-	<string name="its2_5">ITS2 zona 5 (175)</string>
-	<string name="its2_6">ITS2 zona 6 (200)</string>
-	<string name="its2_7">ITS2 zona 7 (225)</string>
-	<string name="its2_8">ITS2 zona 8 (250)</string>
-	<string name="its2_9">ITS2 zona 9 (275)</string>
-	<string name="its2_10">ITS2 zona 10 (300)</string>
->>>>>>> 9a5a1c7e5cc464b10ee9178d50e4b87146999f0f
 	<string name="charge_warning">Upozorenje o naplati</string>
     <string name="charge_warning_summary">Prikaz upozorenja pre svakog upita</string>
     <string name="warning_hide">Ne prikazuj ponovo ovo upozorenje</string>
