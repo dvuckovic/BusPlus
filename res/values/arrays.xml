@@ -84,9 +84,9 @@
         <item>22005</item>
     </string-array>
     <string-array name="carrier_rates">
-        <item>3,54</item>
-        <item>2,95</item>
-        <item>2,95</item>
+        <item>1,77</item>
+        <item>1,77</item>
+        <item>1,77</item>
     </string-array>
 
 </resources>
