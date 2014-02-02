@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,17 +16,18 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+//import android.util.Log;
 
 /** SQLite database worker with predefined methods **/
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-	private static final int SCHEMA_VERSION = 11;
+	private static final int SCHEMA_VERSION = 18;
 	private static String DB_PATH = "/data/data/com.dvuckovic.busplus/databases/";
 	private static String DB_NAME = "busplus.db";
 	private SQLiteDatabase myDataBase;
 	private final Context myContext;
-
+	
 	/**
 	 * Constructor takes and keeps a reference of the passed context in order to
 	 * access to the application assets and resources.
@@ -73,6 +75,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 				}
 				favorites.close();
 
+				ArrayList<ArrayList<String>> his = new ArrayList<ArrayList<String>>();
+
+				if (ver >= 16) {
+					Cursor history = oldDB.rawQuery(
+							"SELECT _id, sid, name FROM history", null);
+
+					history.moveToFirst();
+					while (history.isAfterLast() == false) {
+						int id = history.getInt(history.getColumnIndex("_id"));
+						int sid = history.getInt(history.getColumnIndex("sid"));
+						String name = history.getString(history
+								.getColumnIndex("name"));
+						ArrayList<String> row = new ArrayList<String>();
+						row.add(Integer.toString(id));
+						row.add(Integer.toString(sid));
+						row.add(name);
+						his.add(row);
+						history.moveToNext();
+					}
+					history.close();
+				}
+
 				oldDB.close();
 
 				myContext.deleteDatabase(DB_NAME);
@@ -97,8 +121,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 					}
 				}
 
-				Log.d("com.dvuckovic.busplus", "Database updated (v"
-						+ SCHEMA_VERSION + ")!");
+				if (ver >= 16) {
+					Iterator<ArrayList<String>> iterator2 = his.iterator();
+					while (iterator2.hasNext()) {
+						ArrayList<String> row = iterator2.next();
+						ContentValues cv = new ContentValues();
+						cv.put("_id", row.get(0));
+						cv.put("sid", row.get(1));
+						cv.put("name", row.get(2));
+						try {
+							getWritableDatabase().insertOrThrow("history",
+									"name", cv);
+						} catch (SQLiteConstraintException e) {
+							//
+						}
+					}
+				}
+
+				/*
+				 * Log.d("com.dvuckovic.busplus", "Database updated (v" +
+				 * SCHEMA_VERSION + ")!");
+				 */
 			} else {
 				oldDB.close();
 			}
@@ -271,7 +314,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	 * Returns all records from the Favorites table
 	 * 
 	 * @param sortBy
-	 *
+	 * 
 	 * @return Cursor with results
 	 **/
 	public Cursor getFavorites(int sortBy) {
@@ -288,6 +331,61 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 					"SELECT _id, name FROM favorites ORDER BY name", null);
 			break;
 		}
+
+		return c;
+	}
+
+	/**
+	 * Inserts a station in History table
+	 * 
+	 * @param id
+	 * @param name
+	 **/
+	public void insertHistory(int sid, String name) {
+		String[] args = { String.valueOf(sid) };
+		getWritableDatabase().delete("history", "sid=?", args);
+
+		ContentValues cv = new ContentValues();
+
+		cv.put("sid", sid);
+		cv.put("name", name);
+
+		try {
+			getWritableDatabase().insertOrThrow("history", "name", cv);
+			getWritableDatabase()
+					.delete("history",
+							"_id NOT IN (SELECT _id FROM history ORDER BY _id DESC LIMIT 10)",
+							null);
+		} catch (SQLiteConstraintException e) {
+
+		}
+	}
+
+	/**
+	 * Removes a station in History table based on it's id
+	 * 
+	 * @param id
+	 **/
+	public void removeHistory(String id) {
+		String[] args = { id };
+		getWritableDatabase().delete("history", "sid=?", args);
+	}
+
+	/** Clears History table **/
+	public void clearHistory() {
+		getWritableDatabase().delete("history", null, null);
+	}
+
+	/**
+	 * Returns all records from the History table
+	 * 
+	 * @return Cursor with results
+	 **/
+	public Cursor getHistory() {
+		Cursor c = null;
+
+		c = getReadableDatabase().rawQuery(
+				"SELECT _id, sid, name FROM history ORDER BY _id DESC", null);
 
 		return c;
 	}
@@ -399,7 +497,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 		String[] args = { lineId };
 		Cursor c = getReadableDatabase().rawQuery(
-				"SELECT _id, stations_" + dir.toLowerCase()
+				"SELECT _id, stations_" + dir.toLowerCase(Locale.US)
 						+ " FROM lines WHERE _id=? LIMIT 1", args);
 		c.moveToFirst();
 
@@ -439,6 +537,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 								+ "(name LIKE ? OR name LIKE ? OR name LIKE ? OR name LIKE ?)"
 								+ " OR "
 								+ "(desc_ascii LIKE ? OR desc_ascii LIKE ? OR desc_ascii LIKE ? OR desc_ascii LIKE ?)",
+						args));
+	}
+
+	public Cursor getLinesByStation(String str) {
+		String[] args = { str + ",%", "%," + str + ",%", "%," + str,
+				str + ",%", "%," + str + ",%", "%," + str };
+		return (getReadableDatabase()
+				.rawQuery(
+						"SELECT _id, name FROM lines WHERE "
+								+ "(stations_a LIKE ? OR stations_a LIKE ? OR stations_a LIKE ?)"
+								+ " OR "
+								+ "(stations_b LIKE ? OR stations_b LIKE ? OR stations_b LIKE ?)",
 						args));
 	}
 

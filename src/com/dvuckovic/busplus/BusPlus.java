@@ -1,5 +1,7 @@
 package com.dvuckovic.busplus;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Application;
@@ -29,6 +31,12 @@ public class BusPlus extends Application {
 	public final static String INTENT_NAME = "com.dvuckovic.busplus.CALL_USSD_CODE";
 	private SharedPreferences prefs;
 
+	// public static boolean showMap = false;
+	public static String showStationId = "";
+	public static String showStationIdVal = "";
+	public static String showLineId = "";
+	public static int mapZoom = 17;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -36,6 +44,18 @@ public class BusPlus extends Application {
 		// Our preference manager for getting preferences out of the storage
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+		// Get rid of the old widget zone preference
+		if (!prefs.getBoolean("widget_zone_removed2", false)) {
+			prefs.edit().remove("widget_zone").commit();
+			prefs.edit().putBoolean("widget_zone_removed2", true).commit();
+		}
+
+		// Reenable Web service
+		if (!prefs.getBoolean("web_service_reenabled", false)) {
+			prefs.edit().putString("service", "web").commit();
+			prefs.edit().putBoolean("web_service_reenabled", true).commit();
+		}
 
 		// Call the setLanguage method
 		setLanguage(prefs.getString("language", "sr"));
@@ -107,7 +127,7 @@ public class BusPlus extends Application {
 		float canvasHeight = c.getHeight();
 		float textWidth = tPaint.measureText(stationCode);
 		float startPositionX = (canvasWidth - textWidth) / 2;
-		float startPositionY = canvasHeight / 2 + Math.round(density / 50);
+		float startPositionY = canvasHeight / 2 + Math.round(density / 50) + 2;
 		tPaint.setTextAlign(Paint.Align.LEFT);
 		tPaint.setColor(Color.WHITE);
 		c.drawText(stationCode, startPositionX, startPositionY, tPaint);
@@ -135,5 +155,110 @@ public class BusPlus extends Application {
 	public void showToastMessage(String message) {
 		Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT)
 				.show();
+	}
+
+	public static int getType(String line) {
+
+		int[] tram = { 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 14 };
+		List<Integer> tramList = new ArrayList<Integer>(tram.length);
+		for (int i = 0; i < tram.length; i++)
+			tramList.add(tram[i]);
+
+		int[] troly = { 19, 21, 22, 28, 29, 40, 41 };
+		List<Integer> trolyList = new ArrayList<Integer>(troly.length);
+		for (int i = 0; i < troly.length; i++)
+			trolyList.add(troly[i]);
+
+		int[] bus = { 15, 16, 17, 18, 20, 23, 24, 25, 26, 27, 30, 31, 32, 33,
+				34, 35, 37, 38, 39, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
+				53, 54, 55, 56, 57, 58, 59, 60, 65, 67, 68, 69, 71, 72, 73, 74,
+				75, 76, 77, 78, 79, 81, 82, 83, 84, 85, 87, 88, 89, 91, 92, 94,
+				95, 96, 101, 102, 104, 105, 106, 107, 108, 109, 110, 202, 302,
+				303, 304, 305, 306, 307, 308, 309, 310, 400, 401, 402, 403,
+				405, 406, 407, 408, 503, 504, 511, 512, 513, 521, 522, 531,
+				532, 533, 534, 551, 552, 601, 602, 603, 604, 605, 606, 610,
+				611, 612, 700, 702, 703, 704, 705, 706, 707, 708, 709, 711 };
+		List<Integer> busList = new ArrayList<Integer>(bus.length);
+		for (int i = 0; i < bus.length; i++)
+			busList.add(bus[i]);
+
+		int lineInt = 0;
+		String lineStr = "";
+
+		String[] specs = { "ADA1", "ADA2", "ADA3", "ADA4", "ADA5" };
+
+		for (String spec : specs)
+			if (line.equals(spec))
+				return 0;
+
+		for (int i = 0; i < line.length(); i++) {
+			char c = line.charAt(i);
+			try {
+				lineStr += String.valueOf(Integer.parseInt(String.valueOf(c)));
+			} catch (NumberFormatException e) {
+				// e.printStackTrace();
+			}
+		}
+
+		try {
+			lineInt = Integer.parseInt(lineStr);
+		} catch (NumberFormatException e) {
+			// e.printStackTrace();
+		}
+
+		if (tramList.contains(lineInt))
+			return 1;
+		else if (trolyList.contains(lineInt))
+			return 2;
+		else if (busList.contains(lineInt))
+			return 3;
+
+		return 0;
+
+	}
+
+	public static int getBackgroundColor(String line) {
+
+		int type = getType(line);
+		switch (type) {
+		case 1:
+			return Color.rgb(222, 36, 24);
+		case 2:
+			return Color.rgb(255, 96, 0);
+		case 3:
+			return Color.rgb(49, 121, 198);
+		case 0:
+		default:
+			return Color.rgb(0, 0, 180);
+		}
+
+	}
+
+	public static int getTextColor(String line) {
+
+		int type = getType(line);
+		switch (type) {
+		case 3:
+		case 1:
+		case 2:
+		case 0:
+		default:
+			return Color.rgb(255, 255, 255);
+		}
+
+	}
+
+	public static int getShadowColor(String line) {
+
+		int type = getType(line);
+		switch (type) {
+		case 3:
+		case 1:
+		case 2:
+		case 0:
+		default:
+			return Color.rgb(0, 0, 0);
+		}
+
 	}
 }

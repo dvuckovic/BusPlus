@@ -5,10 +5,12 @@
 
     <TextView
         android:id="@+id/itemId"
-        android:layout_width="60dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center|center_vertical"
-        android:padding="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_margin="5dp"
         android:singleLine="true"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:textColor="@android:color/white" >
@@ -17,9 +19,10 @@
     <TextView
         android:id="@+id/itemName"
         android:layout_width="fill_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:gravity="center_vertical"
+        android:layout_margin="4dp"
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"

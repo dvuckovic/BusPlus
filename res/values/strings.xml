@@ -34,11 +34,12 @@
     <string name="add">Add</string>
     <string name="add_from_list">List</string>
     <string name="add_from_line">Line</string>
-    <string name="clear_favorites">Clear</string>
+    <string name="clear_favorites">Clear Favorites</string>
+    <string name="clear_favorites_summary">Empties favorites list completely</string>
     <string name="cancel">Cancel</string>
     <string name="blank_station_code">Please enter a station code!</string>
     <string name="blank_station_name">Please enter a station name!</string>
-    <string name="clear_favorites_confirm">Are you sure you want to clear favorites list?</string>
+    <string name="clear_favorites_confirm">Are you sure you want to clear favorites list?\n\nThis action cannot be undone!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="choose_station">Choose a station</string>
@@ -47,7 +48,6 @@
     <string name="show_nearby">Nearby</string>
     <string name="show_line">Line</string>
     <string name="show_view">All</string>
-    <string name="general">General</string>
     <string name="map">Map</string>
     <string name="shortcuts">Shortcuts</string>
     <string name="shortcut_icon">Shortcut icon</string>
@@ -66,7 +66,7 @@
     <string name="tabs_position_top">Top</string>
     <string name="tabs_position_bottom">Bottom</string>
     <string name="sort_by">Sort by</string>
-    <string name="sort_by_summary">Sort order in Favorites list</string>
+    <string name="sort_by_summary">Sort order in favorites list</string>
     <string name="station_name_alone">Station name</string>
     <string name="map_satellite">Satellite map</string>
     <string name="map_satellite_summary">Use satellite view on map instead</string>
@@ -80,15 +80,13 @@
     <string name="help_shortcut_color">Shortcut icon color</string>
     <string name="help_shortcut_color_text">You can change the color of the icon for your home launcher shortcuts. Go to Settings and check Custom icon color. Then set the icon hue using the seek bar. To reset the hue, tap on icon preview.\n\nNow, each new shortcut will use the set icon color. To change it again, go to the settings and change the hue. To reset it, uncheck the Custom icon color.</string>
     <string name="about">About app</string>
-    <string name="about_text">BusPlus is <b>unofficial</b> Android app that simplifies the use of the BusPlus (mass transit system in Belgrade) USSD service that shows how far is the next bus from your station.\n\n<b>IMPORTANT:</b> After six months of free use, charging has begun for this USSD info service, starting with September 16th 2012. For users of Telekom, Vip mobile and Telenor networks rate is 1,80 RSD per query.\n\nService takes station codes as an input, and app tries to streamline this so you can query the service without the knowledge of correct code.\n\nStation codes can be listed either by their names or line numbers (which use said stations along their route).\n\nAdditionally, app can plot station positions on a map, along with your current location (retrieved from GPS).\n\nStations can be added to Favorites list for a much quicker later use. This list is persisted across the updates, so there is no fear it will be lost (unless you deliberately uninstall it).\n\nMany options can be changed under Settings menu on first tab. Similarly, much of the functionality is under option menus on each tab.\n\n<b>GENERIC WAIVER OF LIABILITY (from busplus.rs)</b>\n\nData which info service provide for estimated arrival time of vehicle to the station, or distance of vehicle from it, represent indicated information based on last known status of the vehicle in the mass transit system of Belgrade (ITS1 and ITS2) and used equipment. While there have been extensive measures taken in order to provide the most accurate information, real world deviations are still possible because of tehnical and operational limitations of the system. Provider will not be held accountable for consequences one might suffer because of information obtained using the service.</string>
-    <string name="about_donations">Donations</string>
-    <string name="about_donations_text">This app was open to optional donations, but because of absolute lack of interest it isn\'t anymore. Developer will continue to support and update the app in his free time.</string>
+    <string name="about_text">BusPlus is <b>original</b> and <b>unofficial</b> Android app that simplifies the use of the BusPlus (mass transit system in Belgrade) USSD info service that shows how far is the next bus from your station.\n\n<b>IMPORTANT:</b> After six months of free use, charging has begun for USSD info service, starting with September 16th 2012. For users of Telekom, Vip mobile and Telenor networks rate is 1,80 RSD per query.\n\n<b>EVEN MORE IMPORTANT:</b> This app is unofficial and non-profit and it\'s author does not make any income from service charge. Complete responsibility for operation and accuracy of info service lies with the company behind it (Apex Solution Technology).\n\nService takes station codes as an input, and app tries to streamline this so you can query the service without the knowledge of correct code.\n\nStation codes can be listed or searched either by their names or line numbers (which use said stations along their route).\n\nAdditionally, app can plot station positions on a map, along with your current location (retrieved from GPS).\n\nStations can be added to Favorites list for a much quicker later use. This list is persisted across the updates, so there is no fear it will be lost (unless you deliberately uninstall it). You also have an option to export/import favorites to file (see Settings).\n\nMany options can be changed under Settings menu on first tab. Similarly, much of the functionality is under option menus on each tab.\n\n<b>GENERIC WAIVER OF LIABILITY</b>\n\nData which info service provide for estimated arrival time of vehicle to the station, or distance of vehicle from it, represent indicated information based on last known status of the vehicle in the mass transit system of Belgrade (ITS1 and ITS2) and used equipment. While there have been extensive measures taken in order to provide the most accurate information, real world deviations are still possible because of tehnical and operational limitations of the system. Provider will not be held accountable for consequences one might suffer because of information obtained using the service.\n\n<b>LINKS</b>\n<a href="http://bit.ly/busplus">Project page</a>\n<a href="https://github.com/dvuckovic/BusPlus">Source code</a>\n</string>
     <string name="widget">Widget</string>
     <string name="widget_name">BusPlus Balance</string>
     <string name="widget_title">Balance</string>
     <string name="widget_summary">Set your balance to new value</string>
     <string name="widget_dialog">Set your balance to new value:</string>
-    <string name="widget_help">To add a widget, long press on your home screen and choose Widget>BusPlus Balance. One tap on widget reduces your balance by a single ticket fare.\n</string>
+    <string name="widget_help">To add a widget, open app launcher and find Widget>BusPlus Balance. One tap on widget reduces your balance by a single ticket fare.\n</string>
     <string name="widget_loading">…</string>
     <string name="widget_zone">Tariff zone</string>
     <string name="widget_zone_summary">Choose tariff zone (ticket fare)</string>
@@ -97,27 +95,55 @@
     <string name="widget_type1">Style 1</string>
     <string name="widget_type2">Style 2</string>
     <string name="widget_type3">Style 3</string>
-    <string name="its1_1">ITS1 zone 1 or 2 (72)</string>
-    <string name="its1_2">ITS1 zone 1 and 2 (114)</string>
-    <string name="its2_1">ITS2 zone 1 (96)</string>
-    <string name="its2_2">ITS2 zone 2 (120)</string>
-    <string name="its2_3">ITS2 zone 3 (150)</string>
-    <string name="its2_4">ITS2 zone 4 (180)</string>
-    <string name="its2_5">ITS2 zone 5 (210)</string>
-    <string name="its2_6">ITS2 zone 6 (240)</string>
-    <string name="its2_7">ITS2 zone 7 (270)</string>
-    <string name="its2_8">ITS2 zone 8 (300)</string>
-    <string name="its2_9">ITS2 zone 9 (330)</string>
-    <string name="its2_10">ITS2 zone 10 (360)</string>
-    <string name="charge_warning">Charge warning</string>
-    <string name="charge_warning_summary">Show warning before each request</string>
-    <string name="warning_hide">Do not show again</string>
+    <string name="widget_type4">Style 4</string>
+    <string name="its1_1">ITS1 (73)</string>
+    <string name="its1_75min">ITS1 75 min (101)</string>
+    <string name="its2_1">ITS2 zone 1 (97)</string>
+    <string name="its2_2">ITS2 zone 2 (122)</string>
+    <string name="its2_3">ITS2 zone 3 (152)</string>
+    <string name="its2_4">ITS2 zone 4 (183)</string>
+    <string name="its2_5">ITS2 zone 5 (213)</string>
+    <string name="its2_6">ITS2 zone 6 (244)</string>
+    <string name="its2_7">ITS2 zone 7 (275)</string>
+    <string name="its2_8">ITS2 zone 8 (305)</string>
+    <string name="its2_9">ITS2 zone 9 (336)</string>
+    <string name="its2_10">ITS2 zone 10 (366)</string>
+    <string name="widget_zone_custom">Custom value&#8230;</string>
+    <string name="widget_zone_custom_title">Ticket fare</string>
+    <string name="widget_zone_custom_body">Set ticket fare to custom value:</string>
     <string name="warning_title">Warning!</string>
     <string name="warning_meesage">The following USSD query will charge your phone bill! For carrier \"%1$s\" rate is %2$s RSD per query.\n\nAre you sure you want to continue?</string>
     <string name="warning_unknown">The following USSD query will charge your phone bill! For carrier \"%1$s\" rate is unknown (approximately 2 RSD per query).\n\nAre you sure you want to continue?</string>
+	<string name="category_interface">Interface</string>
+	<string name="no_station_location">Sorry, no location for this station :(</string>
+	<string name="tasker_integration">Would you like to enable Tasker integration and allow this app to reduce your balance for a single ticket fare?</string>
+	<string name="tasker_help">Tasker integration has been already enabled, to revoke please remove it from the Tasker list.</string>
+	<string name="favorites_export">Export favorites</string>
+	<string name="favorites_export_summary">Export favorites to a local file</string>
+	<string name="favorites_export_error">There was an unknown error exporting favorites!</string>
+	<string name="favorites_export_success">Favorites exported successfully to</string>
+	<string name="favorites_import">Import favorites</string>
+	<string name="favorites_import_summary">Import favorites from a local file</string>
+	<string name="favorites_import_fnf">Favorites file not found! Please make sure file named \"busplus.fav\" is located in the root of your SD card or internal storage.</string>
+	<string name="favorites_import_error">There was an unknown error importing favorites! Please make sure file named "busplus.fav" is located in the root of your SD card or internal storage.</string>
+	<string name="favorites_import_success">Favorites imported successfully!</string>
+	<string name="history">History</string>
+	<string name="history_clear">Clear history</string>
+	<string name="history_clear_confirm">Really clear whole history?</string>
+	<string name="history_remove">Remove from history</string>
+	<string name="show_map">Show on map</string>
+	<string name="author">Author</string>
+	<string name="author_text"><a href="http://www.dvuckovic.com">Dusan Vuckovic</a></string>
+	<string name="contributors">Contributors</string>
+	<string name="contributors_text1">Filip Stanisavljevic\nIvan Petrovic\n<a href="http://www.vladislavjevremovic.com">Vladislav Jevremovic</a>\nDimitrije Pavlovic\nStevan Bozinovic\nMladen Jablanovic</string>
+	<string name="contributors_text2">Radomir Kujovic\nAndrej Razborsek\nIvana Jovanovic\nMladen Miladinovic\nAndrej Krizan\nSvetislav Milicevic\nSlobodan Peric\nMarko Jovicic\nBozidar Ciric\nTijana Djurdjevic\nVesna Koen\nNikola Cvetkovic\nIrina Loncar\nMilenko Pavlovic\nJovan Milosevic\nMirjana Majstorovic\nBojan Jerkovic\nBranislav Bajalica\nIgor Valjevic\nMilan Jordanovic</string>
+	<string name="testers">Testers</string>
+	<string name="testers_text">Milana :)\nGolub\nLuka</string>
 
-    <!-- Joint strings -->
-    <string name="ok">OK</string>
-    <string name="rsd">RSD</string>
+	<!-- Joint strings -->
+	<string name="ok">OK</string>
+	<string name="rsd">RSD</string>
+	<string name="twitter">Twitter</string>
+	<string name="station_info">Info</string>
 
 </resources>

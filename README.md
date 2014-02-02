@@ -1,16 +1,21 @@
 BusPlus
 ======
 
-<img align="right" src="http://www.dvuckovic.com/sites/default/files/projects/icons/busplus.png"/>BusPlus is a small Android app for mass transit system in Belgrade that shows how far is the next bus from your station.
+<img align="right" src="http://www.dvuckovic.com/sites/default/files/projects/icons/busplus.png"/>BusPlus is a small Android app that shows how far is the next bus/tram/trolly from your station. It utilizes info service for Belgrade mass transit system.
 
 <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-1.jpg" target="_blank" title="Screenshot #1"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-1_thumb.jpg" alt="Screenshot #1" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-2.jpg" target="_blank" title="Screenshot #2"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-2_thumb.jpg" alt="Screenshot #2" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-3.jpg" target="_blank" title="Screenshot #3"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-3_thumb.jpg" alt="Screenshot #3" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-4.jpg" target="_blank" title="Screenshot #4"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-4_thumb.jpg" alt="Screenshot #4" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-5.jpg" target="_blank" title="Screenshot #5"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-5_thumb.jpg" alt="Screenshot #5" border="0"/></a> <a href="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-6.jpg" target="_blank" title="Screenshot #6"><img src="http://www.dvuckovic.com/sites/default/files/projects/busplus/screenshot-6_thumb.jpg" alt="Screenshot #6" border="0"/></a>
+
+How it works
+------
+
+It works by sending USSD (MMI) queries into info service. App streamlines these queries by organizing stations and lines that uses them along the way. Of course, locations of vehicles are coarse and the system can only show how many bus stops is a vehicle away from you (your current bus stop). Every bus stop has a unique code which is used as an input for the service. This service is available only on three local mobile networks in Serbia, and is charged accordingly (1.8 RSD per query since September 16th 2012).
+
+Unfortunately, there is still no USSD API for Android in the works, but I managed to execute them by raising Intent to the system dialer app.
 
 Features
 ------
 
-Belgrade BusPlus system provides users with the location of nearby buses through simple USSD (MMI) info service. Of course these locations are coarse and the system can only show how many bus stops is a vehicle away from you (your current bus stop). Every bus stop has a unique code which is used as an input for the service. USSD service is available only on three local mobile networks and is charged for each query since September 16th 2012.
-
-Unfortunately, there is still no USSD API for Android in the works, but I managed to execute them by raising Intent to the system dialer app. BusPlus app has three views and can be used to query the USSD info service in several ways:
+BusPlus app has three views and can be used to make queries in several ways:
 
 * manual code entry (if you know it :)
 * search by station name (not easy, because most of station names are duplicated for both directions)
@@ -20,7 +25,7 @@ Unfortunately, there is still no USSD API for Android in the works, but I manage
 
 App also supports two locales (Serbian and English), which can be switched in app Settings menu.
 
-Several new features have been squeezed in over time (mostly from comments):
+Several new features have been squeezed in over time (mostly from comments on Play Store):
 
 * more complete station database
 * more precise locations for most stations
@@ -38,8 +43,10 @@ Several new features have been squeezed in over time (mostly from comments):
 * Tasker integration
 * ICS API
 
-App in action (YouTube)
+YouTube
 ------
+
+Take a look at the app in action:
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=a_RA8AqtA94" target="_blank"><img src="http://img.youtube.com/vi/a_RA8AqtA94/0.jpg" 
 alt="BusPlus Video" width="320" border="10" /></a>
@@ -59,12 +66,12 @@ Donations
 
 This project was open to optional donations, but because of absolute lack of interest it isn't anymore. I will continue to support and update the app in my free time.
 
-License
+Source
 ------
-Source code is released under [WTFPL license](http://sam.zoy.org/wtfpl/).
 
-> Note: Since this app use Google Maps MapView, you will need your own API key (change it in `map.xml` layout file).
+App has been written in Java for Android, and compiled using official Android SDK.
 
+> Note: Since this app uses Google Maps MapView, you will need your own API key (just change it in `map.xml` layout file).
 
     <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -80,3 +87,8 @@ Source code is released under [WTFPL license](http://sam.zoy.org/wtfpl/).
             android:apiKey="-----------YOUR_API_KEY_HERE-----------"
             android:clickable="true" />
     ...
+
+License
+------
+
+Source code is released under [WTFPL license](http://sam.zoy.org/wtfpl/).

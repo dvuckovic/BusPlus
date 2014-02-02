@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -222,6 +225,161 @@ public class SearchActivity extends ListActivity {
 					}
 				});
 
+		// Show on map context menu
+		menu.add(0, 3, 4, getString(R.string.show_map))
+				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+					public boolean onMenuItemClick(MenuItem item) {
+						if (!BusPlusActivity.active) {
+							BusPlus.showStationId = String.valueOf(stationId);
+							Intent i = new Intent(getBaseContext(),
+									BusPlusActivity.class);
+							i.setAction(BusPlusActivity.SHOW_MAP_TAB);
+							startActivity(i);
+						} else {
+							BusPlus.showStationId = String.valueOf(stationId);
+							Intent i = new Intent(BusPlusActivity.SHOW_MAP_TAB);
+							sendBroadcast(i);
+						}
+
+						return true;
+					}
+				});
+
+		menu.add(0, 4, 5, getString(R.string.station_info))
+				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+					public boolean onMenuItemClick(MenuItem item) {
+						// Show dialog with options on tap
+						AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+								.getMenuInfo();
+						Cursor cursor = (Cursor) dataSource
+								.getItem(info.position);
+						final String stationCode = cursor.getString(cursor
+								.getColumnIndex("_id"));
+						final String stationName = cursor.getString(cursor
+								.getColumnIndex("name"));
+
+						AlertDialog.Builder builder = new AlertDialog.Builder(
+								SearchActivity.this);
+
+						Cursor cur = helper.getLinesByStation(stationCode);
+						startManagingCursor(cur);
+
+						String[] lines = new String[cur.getCount()];
+						int k = 0;
+
+						if (cur.getCount() != 0) {
+							cur.moveToFirst();
+							while (cur.isAfterLast() == false) {
+								lines[k] = cur.getString(cur
+										.getColumnIndex("name"));
+								k++;
+								cur.moveToNext();
+							}
+						}
+
+						stopManagingCursor(cur);
+						cur.close();
+
+						LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+						View v = li.inflate(R.layout.message, null, false);
+
+						TextView stationNameView = (TextView) v
+								.findViewById(R.id.stationName);
+						stationNameView.setTextAppearance(SearchActivity.this,
+								android.R.style.TextAppearance_Medium);
+						stationNameView.setText("[" + stationCode + "] "
+								+ stationName);
+
+						FlowLayout fl = (FlowLayout) v
+								.findViewById(R.id.flowLayout);
+
+						for (String line : lines) {
+
+							TextView lineTextView = new TextView(
+									SearchActivity.this);
+							lineTextView.setTextAppearance(SearchActivity.this,
+									android.R.style.TextAppearance_Medium);
+							lineTextView.setBackgroundColor(BusPlus
+									.getBackgroundColor(line));
+							lineTextView.setShadowLayer(3, 0, 0,
+									Color.rgb(0, 0, 0));
+							lineTextView.setText(" " + line + " ");
+
+							fl.addView(lineTextView);
+						}
+
+						builder.setTitle(getString(R.string.station))
+								.setView(v)
+								// .setMessage(tapName + " (" + tapCode + ")")
+								.setNegativeButton(getString(R.string.query),
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface dialog,
+													int which) {
+												// USSD query
+												Intent i = new Intent(
+														SearchActivity.this,
+														FavoritesActivity.class);
+												i.putExtra(
+														FavoritesActivity.EXTRA_ID,
+														stationCode);
+												i.setAction(FavoritesActivity.INTENT_NAME);
+												startActivity(i);
+												dialog.dismiss();
+											}
+										})
+								.setNeutralButton(
+										getString(R.string.favorites),
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface dialog,
+													int which) {
+												String suffix = "";
+												if (!lineSummary.equals(""))
+													suffix = " ("
+															+ lineSummary
+																	.replaceAll(
+																			"\\s+/.*?/",
+																			"")
+															+ ")";
+
+												// Add favorite and toast a
+												// message
+												helper.insertFavorite(Integer
+														.parseInt(stationCode),
+														stationName + suffix);
+												BusPlus bp = (BusPlus) getApplicationContext();
+												bp.showToastMessage(getString(R.string.favorite_added_to_list));
+											}
+										})
+								.setPositiveButton(
+										getString(R.string.shortcut),
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface dialog,
+													int which) {
+												String suffix = "";
+												if (!lineSummary.equals(""))
+													suffix = " ("
+															+ lineSummary
+																	.replaceAll(
+																			"\\s+/.*?/",
+																			"")
+															+ ")";
+
+												// Add shortcut
+												BusPlus bp = (BusPlus) getApplicationContext();
+												bp.setupShortcut(stationCode,
+														stationName + suffix);
+											}
+										});
+						AlertDialog alert = builder.create();
+						alert.show();
+
+						return true;
+					}
+				});
+
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
 
@@ -242,7 +400,7 @@ public class SearchActivity extends ListActivity {
 
 		// Close this activity and return to previous, our work here is probably
 		// done
-		// finish();
+		finish();
 	}
 
 	/**

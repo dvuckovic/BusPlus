@@ -66,6 +66,20 @@ public class BalanceDialog extends Activity {
 				intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
 				intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 				sendBroadcast(intent);
+
+				if (TaskerIntent.testStatus(context).equals(TaskerIntent.Status.OK)
+						|| TaskerIntent.testStatus(context).equals(
+								TaskerIntent.Status.NotEnabled)) {
+
+					TaskerIntent i = new TaskerIntent("SET_VARS");
+
+					i.addAction(ActionCodes.SET_VARIABLE).addArg("%BusPlusBalance")
+							.addArg(balanceTxt.getText().toString()).addArg(false)
+							.addArg(false);
+
+					context.sendBroadcast(i);
+				}
+
 				finish();
 			}
 		});
@@ -77,5 +91,6 @@ public class BalanceDialog extends Activity {
 				finish();
 			}
 		});
+
 	}
 }

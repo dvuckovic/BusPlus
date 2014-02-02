@@ -7,7 +7,7 @@
     <string name="location">Lokacija</string>
     <string name="favorites">Odabrana</string>
     <string name="station_code">Kôd stajališta</string>
-    <string name="query">Pozovi</string>
+    <string name="query">Upit</string>
     <string name="or">-- ili --</string>
     <string name="station_name">Naziv ili kôd stajališta</string>
     <string name="line_name">Naziv ili broj linije</string>
@@ -34,7 +34,8 @@
     <string name="add">Dodaj</string>
     <string name="add_from_list">Lista</string>
     <string name="add_from_line">Linija</string>
-    <string name="clear_favorites">Izbriši</string>
+    <string name="clear_favorites">Izbriši listu odabranih</string>
+    <string name="clear_favorites_summary">Brisanje kompletne liste odabranih</string>
     <string name="cancel">Odustani</string>
     <string name="blank_station_code">Unesite kôd stajališta!</string>
     <string name="blank_station_name">Unesite naziv stajališta!</string>
@@ -47,9 +48,9 @@
     <string name="show_nearby">Obližnja</string>
     <string name="show_line">Linija</string>
     <string name="show_view">Sve</string>
-    <string name="general">Aplikacija</string>
     <string name="map">Mapa</string>
     <string name="shortcuts">Prečice</string>
+    <string name="shortcut_icon">Ikonica prečica</string>
     <string name="shortcut_custom_color">Boja ikonice</string>
     <string name="shortcut_custom_color_summary">Proizvoljna boja za nove prečice</string>
     <string name="shortcut_hue">Ton ikonice (dodir na ikonicu za reset)</string>
@@ -79,9 +80,7 @@
     <string name="help_shortcut_color">Boja ikonice</string>
     <string name="help_shortcut_color_text">Možete promeniti boju ikonice za prečice na desktop-u. Idite u Podešavanja i uključite Boja ikonice. Onda podesite ton ikonice pomeranjem podešavanja ispod. Za vraćanje početne nijanse, dodirnite ikonicu levo.\n\nSada će svaka nova prečica koristiti postavljenu boju ikonice. Za novu promenu, idite u podešavanja i promenite nijansu. Za isključivanje ove opcije, isključite Boja ikonice.</string>
     <string name="about">O aplikaciji</string>
-    <string name="about_text">BusPlus je <b>nezvanična</b> Android aplikacija koja pojednostavljuje korišćenje Bus Plus USSD info servisa za javljanje podataka o udaljenosti sledećeg prevoza od vaše stanice.\n\n<b>VAŽNO:</b> Nakon šest meseci besplatnog korišćenja, usluga info servisa počela je sa naplatom od 16. septembra 2012. Za korisnike mobilnih mreža Telekom, Vip mobile i Telenor cena po jednom upitu iznosi 1,80 din.\n\nServis prihvata kodove stajališta kao upit i aplikacija pokušava da olakša ovaj proces kako ne biste morali da znate tačne kodove.\n\nKodovi stajališta mogu biti izlistani ili po njihovom nazivu ili po nazivu/broju linije (koje koriste te stanice u odgovarajućem smeru).\n\nDodatno, aplikacija može da prikaže i lokacije stajališta na mapi, zajedno sa vašom lokacijom (koja se pribavlja preko GPS).\n\nStanice mogu biti dodate u listu odabranih za kasnije brže korišćenje. Ova lista se čuva između dva update-a, pa nema bojazni da će se izgubiti (osim ukoliko namerno ne obrišete aplikaciju).\n\nMnoge opcije mogu biti promenjene preko menija Podešavanja na prvom tabu. Slično, dosta funkcija se nalazi i u menijima u drugim tabovima.\n\n<b>IZJAVA O OGRANIČENJU ODGOVORNOSTI (preuzeto sa busplus.rs)</b>\n\nPodaci koje pruža servis za procenu nailaska vozila na stanicu, odnosno udaljenosti vozila od iste, predstavljaju indikativne informacije zasnovane na poslednjem dobijenom statusu vozila u okviru Integrisanog tarifnog sistema javnog prevoza u Beogradu (ITS1 i ITS2) i odgovarajućoj opremi. Pored toga što su preduzete sveobuhvatne mere u cilju dobijanja što preciznijih podataka, odstupanja od stvarne situacije na terenu su moguća usled tehnološko-operativnih ograničenja celokupnog sistema za informisanje putnika. Stoga pružalac usluge ne snosi odgovornost za eventualne posledice koje bi korisnik mogao pretrpeti zbog informacija dobijenih putem ovog servisa.</string>
-    <string name="about_donations">Donacije</string>
-    <string name="about_donations_text">Aplikacija je bila otvorena za opcione donacije, ali iz razloga apsolutne nezainteresovanosti više nije. Developer će nastaviti da pruža podršku i održava aplikaciju u svoje slobodno vreme.</string>
+    <string name="about_text">BusPlus je <b>originalna</b> i <b>nezvanična</b> Android aplikacija koja pojednostavljuje korišćenje BusPlus USSD info servisa za obaveštavanje o udaljenosti sledećeg prevoza od vaše stanice.\n\n<b>VAŽNO:</b> Nakon šest meseci besplatnog korišćenja, usluga USSD info servisa počela je sa naplatom od 16. septembra 2012. Za korisnike mobilnih mreža Telekom, Vip mobile i Telenor cena po jednom upitu iznosi 1,80 din.\n\n<b>JOŠ VAŽNIJE:</b> Ova aplikacija je nezvanična i neprofitna, i njen autor nema nikakav prihod od naplate korišćenja servisa. Kompletnu odgovornost za funkcionisanje i tačnost info servisa snosi preduzeće koje stoji iza njega (Apex Solution Technology).\n\nInfo servis prihvata kodove stajališta kao upit i aplikacija pokušava da olakša ovaj proces kako ne biste morali da znate tačne kodove.\n\nKodovi stajališta mogu biti izlistani i pretraženi ili po njihovom nazivu ili po nazivu/broju linije (koje koriste te stanice u odgovarajućem smeru).\n\nDodatno, aplikacija može da prikaže i lokacije stajališta na mapi, zajedno sa vašom lokacijom (koja se pribavlja preko GPS).\n\nStanice mogu biti dodate u listu odabranih za kasnije brže korišćenje. Ova lista se čuva između dva update-a, pa nema bojazni da će se izgubiti (osim ukoliko namerno ne obrišete aplikaciju). Takođe je možete eksportovati/importovati u/iz fajla (vidite Podešavanja).\n\nMnoge opcije mogu biti promenjene preko menija Podešavanja na prvom tabu. Slično, dosta funkcija se nalazi i u menijima u drugim tabovima.\n\n<b>IZJAVA O OGRANIČENJU ODGOVORNOSTI (preuzeto sa busplus.rs)</b>\n\nPodaci koje pruža servis za procenu nailaska vozila na stanicu, odnosno udaljenosti vozila od iste, predstavljaju indikativne informacije zasnovane na poslednjem dobijenom statusu vozila u okviru Integrisanog tarifnog sistema javnog prevoza u Beogradu (ITS1 i ITS2) i odgovarajućoj opremi. Pored toga što su preduzete sveobuhvatne mere u cilju dobijanja što preciznijih podataka, odstupanja od stvarne situacije na terenu su moguća usled tehnološko-operativnih ograničenja celokupnog sistema za informisanje putnika. Stoga pružalac usluge ne snosi odgovornost za eventualne posledice koje bi korisnik mogao pretrpeti zbog informacija dobijenih putem ovog servisa.\n\n<b>LINKOVI</b>\n<a href="http://bit.ly/busplus">Više o projektu</a>\n<a href="https://github.com/dvuckovic/BusPlus">Izvorni kod</a>\n</string>
     <string name="widget">Widget</string>
     <string name="widget_name">BusPlus kredit</string>
     <string name="widget_title">Kredit</string>
@@ -96,23 +95,49 @@
     <string name="widget_type1">Stil 1</string>
     <string name="widget_type2">Stil 2</string>
     <string name="widget_type3">Stil 3</string>
-    <string name="its1_1">ITS1 zona 1 ili 2 (72)</string>
-    <string name="its1_2">ITS1 zona 1 i 2 (114)</string>
-    <string name="its2_1">ITS2 zona 1 (96)</string>
-    <string name="its2_2">ITS2 zona 2 (120)</string>
-    <string name="its2_3">ITS2 zona 3 (150)</string>
-    <string name="its2_4">ITS2 zona 4 (180)</string>
-    <string name="its2_5">ITS2 zona 5 (210)</string>
-    <string name="its2_6">ITS2 zona 6 (240)</string>
-    <string name="its2_7">ITS2 zona 7 (270)</string>
-    <string name="its2_8">ITS2 zona 8 (300)</string>
-    <string name="its2_9">ITS2 zona 9 (330)</string>
-    <string name="its2_10">ITS2 zona 10 (360)</string>
-	<string name="charge_warning">Upozorenje o naplati</string>
-    <string name="charge_warning_summary">Prikaz upozorenja pre svakog upita</string>
-    <string name="warning_hide">Ne prikazuj ponovo ovo upozorenje</string>
+    <string name="widget_type4">Stil 4</string>
+    <string name="its1_1">ITS1 (73)</string>
+    <string name="its1_75min">ITS1 75 min (101)</string>
+    <string name="its2_1">ITS2 zona 1 (97)</string>
+    <string name="its2_2">ITS2 zona 2 (122)</string>
+    <string name="its2_3">ITS2 zona 3 (152)</string>
+    <string name="its2_4">ITS2 zona 4 (183)</string>
+    <string name="its2_5">ITS2 zona 5 (213)</string>
+    <string name="its2_6">ITS2 zona 6 (244)</string>
+    <string name="its2_7">ITS2 zona 7 (275)</string>
+    <string name="its2_8">ITS2 zona 8 (305)</string>
+    <string name="its2_9">ITS2 zona 9 (336)</string>
+    <string name="its2_10">ITS2 zona 10 (366)</string>
+    <string name="widget_zone_custom">Proizvoljna vrednost&#8230;</string>
+    <string name="widget_zone_custom_title">Cena karte</string>
+    <string name="widget_zone_custom_body">Podesite cenu karte na proizvoljnu vrednost:</string>
     <string name="warning_title">Upozorenje!</string>
     <string name="warning_meesage">Usluga BusPlus info servisa će biti naplaćena preko vašeg računa za telefon! Za operatera \"%1$s\" cena je %2$s din po upitu.\n\nDa li ste sigurni da želite da nastavite?</string>
     <string name="warning_unknown">Usluga BusPlus info servisa će biti naplaćena preko vašeg računa za telefon! Za operatera \"%1$s\" cena je nepoznata (otprilike 2 din po upitu).\n\nDa li ste sigurni da želite da nastavite?</string>
-	
+	<string name="category_interface">Interfejs</string>
+	<string name="no_station_location">Nepoznata lokacija stajališta :(</string>
+	<string name="tasker_integration">Da li želite da omogućite Tasker integraciju i dozvolite ovoj aplikaciji da umanji vaš kredit za iznos jedne vožnje?</string>
+	<string name="tasker_help">Tasker integracija je već omogućena, za opoziv uklonite je iz Tasker liste.</string>
+	<string name="favorites_export">Izvoz liste odabranih</string>
+	<string name="favorites_export_summary">Izvoz liste odabranih u lokalni fajl</string>
+	<string name="favorites_export_error">Došlo je do neočekivane greške prilikom izvoza liste odabranih!</string>
+	<string name="favorites_export_success">Lista odabranih uspešno izvezena u</string>
+	<string name="favorites_import">Uvoz liste odabranih</string>
+	<string name="favorites_import_summary">Uvoz liste odabranih iz lokalnog fajla</string>
+	<string name="favorites_import_fnf">Fajl sa listom odabranih nije pronađen! Molimo proverite da li se fajl \"busplus.fav\" nalazi u rutu SD kartice ili interne memorije.</string>
+	<string name="favorites_import_error">Došlo je do neočekivane greške prilikom uvoza liste odabranih! Molimo proverite da li se fajl \"busplus.fav\" nalazi u rutu SD kartice ili interne memorije.</string>
+	<string name="favorites_import_success">Lista odabranih uspešno uvezena!</string>
+	<string name="history">Poslednji upiti</string>
+	<string name="history_clear">Brisanje liste upita</string>
+	<string name="history_clear_confirm">Da li zaista želite da izbrišete listu poslednjih upita?</string>
+	<string name="history_remove">Izbriši iz liste</string>
+	<string name="show_map">Prikaži na mapi</string>
+	<string name="author">Autor</string>
+	<string name="author_text"><a href="http://www.dvuckovic.com">Dušan Vučković</a></string>
+	<string name="contributors">Saradnici</string>
+	<string name="contributors_text1">Filip Stanisavljević\nIvan Petrović\n<a href="http://www.vladislavjevremovic.com">Vladislav Jevremović</a>\nDimitrije Pavlović\nStevan Božinović\nMladen Jablanović</string>
+	<string name="contributors_text2">Radomir Kujović\nAndrej Razboršek\nIvana Jovanović\nMladen Miladinović\nAndrej Križan\nSvetislav Miličević\nSlobodan Perić\nMarko Jovičić\nBožidar Ćirić\nTijana Đurđević\nVesna Koen\nNikola Cvetković\nIrina Lončar\nMilenko Pavlović\nJovan Milošević\nMirjana Majstorović\nBojan Jerković\nBranislav Bajalica\nIgor Valjević\nMilan Jordanović</string>
+	<string name="testers">Testeri</string>
+	<string name="testers_text">Milana :)\nGolub\nLuka</string>
+
 </resources>

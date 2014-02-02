@@ -3,8 +3,8 @@
     xmlns:iconlistpreference="http://schemas.android.com/apk/res/com.dvuckovic.busplus" >
 
     <PreferenceCategory
-        android:key="category_general"
-        android:title="@string/general" >
+        android:key="category_interface"
+        android:title="@string/category_interface" >
         <ListPreference
             android:defaultValue="sr"
             android:dialogTitle="@string/choose_language"
@@ -13,11 +13,6 @@
             android:key="language"
             android:summary="@string/interface_language"
             android:title="@string/language" />
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="show_warning"
-            android:summary="@string/charge_warning_summary"
-            android:title="@string/charge_warning" />
         <ListPreference
             android:defaultValue="1"
             android:dialogTitle="@string/tabs_position"
@@ -34,6 +29,10 @@
             android:key="start_tab"
             android:summary="@string/start_tab_summary"
             android:title="@string/start_tab" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="category_favorites"
+        android:title="@string/favorites" >
         <ListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/sort_by"
@@ -42,6 +41,21 @@
             android:key="sort_by"
             android:summary="@string/sort_by_summary"
             android:title="@string/sort_by" />
+
+        <Preference
+            android:enabled="false"
+            android:key="favorites_export"
+            android:summary="@string/favorites_export_summary"
+            android:title="@string/favorites_export" />
+        <Preference
+            android:key="favorites_import"
+            android:summary="@string/favorites_import_summary"
+            android:title="@string/favorites_import" />
+        <Preference
+            android:enabled="false"
+            android:key="favorites_clear"
+            android:summary="@string/clear_favorites_summary"
+            android:title="@string/clear_favorites" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="category_map"
@@ -71,7 +85,7 @@
         android:key="category_widget"
         android:title="@string/widget" >
         <EditTextPreference
-            android:defaultValue="720"
+            android:defaultValue="730"
             android:dialogMessage="@string/widget_help"
             android:digits="1234567890"
             android:hint="@string/widget_title"
@@ -82,10 +96,10 @@
             android:title="@string/widget_title" />
 
         <ListPreference
-            android:defaultValue="72"
+            android:defaultValue="0"
             android:dialogTitle="@string/widget_zone"
             android:entries="@array/zones"
-            android:entryValues="@array/zone_fares"
+            android:entryValues="@array/zone_ids"
             android:key="widget_zone"
             android:summary="@string/widget_zone_summary"
             android:title="@string/widget_zone" />

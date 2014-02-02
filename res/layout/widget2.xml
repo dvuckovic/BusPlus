@@ -1,45 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="8dp"
     android:background="@drawable/widget_shape2"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="5dp" >
+    android:orientation="vertical" >
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/widget"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:singleLine="true"
-        android:text="@string/app_name"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="9dp" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/balance"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:gravity="center"
-        android:singleLine="true"
-        android:text="@string/widget_loading"
-        android:textColor="@android:color/white"
-        android:textSize="14dp"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/app_name"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="9dp" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:singleLine="true"
-        android:text="@string/rsd"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="9dp" />
+        <TextView
+            android:id="@+id/balance"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/widget_loading"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/rsd"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="9dp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/settings"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="bottom|left"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:contentDescription="@string/widget_zone"
+        android:padding="0dp"
+        android:src="@drawable/settings" />
+
+</FrameLayout>

@@ -2,18 +2,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dvuckovic.busplus"
     android:installLocation="auto"
-    android:versionCode="43"
-    android:versionName="1.12.11" >
+    android:versionCode="90"
+    android:versionName="1.25.14" >
 
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="14" />
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="net.dinglisch.android.tasker.PERMISSION_RUN_TASKS" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
 
     <supports-screens
         android:anyDensity="true"
@@ -23,7 +41,8 @@
 
     <application
         android:name=".BusPlus"
-        android:icon="@drawable/bus_icon"
+        android:allowBackup="true"
+        android:icon="@drawable/launcher_icon"
         android:label="@string/app_name" >
         <activity
             android:name=".BusPlusActivity"
@@ -36,8 +55,13 @@
         </activity>
         <activity android:name=".StationActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".LocationMap" />
-        <activity android:name=".FavoritesActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        <activity
+            android:name=".LocationMap"
+            android:configChanges="orientation" />
+        <activity
+            android:name=".FavoritesActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
             <intent-filter>
                 <action android:name="com.dvuckovic.busplus.CALL_USSD_CODE" />
             </intent-filter>
@@ -47,19 +71,41 @@
         <activity android:name=".InfoActivity" />
         <activity
             android:name=".BalanceDialog"
-            android:theme="@android:style/Theme.Dialog" />
+            android:theme="@android:style/Theme.Holo.Dialog" />
+        <activity
+            android:name=".FareDialog"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+        <activity
+            android:name=".ZoneDialog"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+        <activity
+            android:name=".TaskerActivity"
+            android:icon="@drawable/widget_type1"
+            android:label="@string/widget_name"
+            android:theme="@android:style/Theme.Holo.Dialog" >
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+            </intent-filter>
+        </activity>
 
         <receiver
             android:name=".BalanceWidget"
-            android:icon="@drawable/bus_icon"
+            android:icon="@drawable/launcher_icon"
             android:label="@string/widget_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.dvuckovic.busplus.UPDATE_WIDGET" />
+                <action android:name="com.dvuckovic.busplus.SETTINGS_CLICK" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget" />
+        </receiver>
+        <receiver android:name=".TaskerReceiver" >
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+            </intent-filter>
         </receiver>
 
         <uses-library android:name="com.google.android.maps" />

@@ -2,6 +2,7 @@ package com.dvuckovic.busplus;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -43,9 +46,10 @@ import com.google.android.maps.OverlayItem;
 public class LocationMap extends MapActivity implements LocationListener,
 		OnGestureListener, OnDoubleTapListener {
 
-	//private final static boolean ENABLED_ONLY = true;
+	private final static int CENTER = 0;
+	private final static int CENTER_BOTTOM = 1;
 	private final static int UPDATE_LOCATION = 2;
-	//private final static int NO_PROVIDER = 3;
+	public final static String SHOW_LOCATIONS = "com.dvuckovic.busplus.SHOW_LOCATIONS";
 	private SharedPreferences prefs;
 	private MyMapView mapView;
 	private LocationManager mLocationManager;
@@ -63,6 +67,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 	private boolean isScrolling;
 	private boolean centered = false;
 	private String lineSummary = "";
+	private String status = "";
 
 	/** Called when the activity is first created. */
 	@Override
@@ -85,23 +90,58 @@ public class LocationMap extends MapActivity implements LocationListener,
 		// Set up some map view parameters
 		mapView = (MyMapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
-		mapView.getController().setZoom(17);
+		mapView.getController().setZoom(BusPlus.mapZoom);
 		mapView.setOnZoomListener(new MyMapView.OnZoomListener() {
 			@Override
 			public void onZoom() {
+				BusPlus.mapZoom = mapView.getZoomLevel();
 				if (all)
 					drawViewMarkers();
 			}
 		});
-		centerMap(44.818061, 20.456524);
 
 		// Set Satellite view on our map, if the preference has been set
 		mapView.setSatellite(prefs.getBoolean("map_satellite", false));
+
+		Object retained = getLastNonConfigurationInstance();
+		if (retained != null) {
+			this.status = (String) retained;
+		}
+
+		if (!BusPlus.showStationId.equals("")) {
+			BusPlus.showStationIdVal = BusPlus.showStationId;
+			BusPlus.showStationId = "";
+			drawStationMarker(BusPlus.showStationIdVal);
+		} else if (status.equals("showStation"))
+			drawStationMarker(BusPlus.showStationIdVal);
+		else if (status.equals("showMapCenter")) {
+			centerLocation(noProvider);
+			centered = true;
+		} else if (status.equals("showMapNearby")) {
+			lineSummary = "";
+			drawNearbyMarkers();
+		} else if (status.equals("showMapAll")) {
+			all = true;
+			lineSummary = "";
+			drawViewMarkers();
+		} else if (status.equals("showLineA"))
+			if (!BusPlus.showLineId.equals(""))
+				drawLineMarkers(BusPlus.showLineId, "A");
+			else
+				centerMap(44.818061, 20.456524);
+		else if (status.equals("showLineB"))
+			if (!BusPlus.showLineId.equals(""))
+				drawLineMarkers(BusPlus.showLineId, "B");
+			else
+				centerMap(44.818061, 20.456524);
+		else
+			centerMap(44.818061, 20.456524);
 
 		Button centerBtn = (Button) findViewById(R.id.centerButton);
 		centerBtn.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				// Center location
+				status = "showMapCenter";
 				centerLocation(noProvider);
 				centered = true;
 			}
@@ -111,6 +151,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 		nearbyBtn.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				// Draw nearby stations
+				status = "showMapNearby";
 				lineSummary = "";
 				drawNearbyMarkers();
 			}
@@ -128,14 +169,20 @@ public class LocationMap extends MapActivity implements LocationListener,
 		viewBtn.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				// Draw all stations in view
+				status = "showMapAll";
 				all = true;
 				lineSummary = "";
 				drawViewMarkers();
 			}
 		});
-		
+
 		// Get the best location provider and start location thread
 		initializeLocationAndStartGpsThread();
+	}
+
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		return status;
 	}
 
 	@Override
@@ -158,6 +205,12 @@ public class LocationMap extends MapActivity implements LocationListener,
 	protected void onResume() {
 		// Start monitoring location updates
 		setCurrentGpsLocation(null);
+
+		if (!BusPlus.showStationId.equals("")) {
+			BusPlus.showStationIdVal = BusPlus.showStationId;
+			BusPlus.showStationId = "";
+			drawStationMarker(BusPlus.showStationIdVal);
+		}
 
 		super.onResume();
 	}
@@ -231,13 +284,6 @@ public class LocationMap extends MapActivity implements LocationListener,
 				noProvider = false;
 				mLocationManager.requestLocationUpdates(
 						LocationManager.NETWORK_PROVIDER, 5000, 0, this);
-				/*
-				 * location = mLocationManager
-				 * .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				 * 
-				 * Message msg = Message.obtain(); msg.what = KNOWN_LOCATION;
-				 * LocationMap.this.updateHandler.sendMessage(msg);
-				 */
 
 				// Set no provider
 			} else {
@@ -265,6 +311,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 	 * 
 	 * @see http://www.androidph.com/2009/02/app-10-beer-radar.html
 	 */
+	@SuppressLint("HandlerLeak")
 	Handler updateHandler = new Handler() {
 
 		/** Gets called on every message that is received */
@@ -303,7 +350,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 		GeoPoint currentPosition = new GeoPoint((int) (mLatitude * 1E6),
 				(int) (mLongitude * 1E6));
 		locationOverlay = new MapOverlay(marker, currentPosition, null,
-				getString(R.string.current_location));
+				getString(R.string.current_location), CENTER);
 		mapOverlays.add(locationOverlay);
 
 		// Refresh map view
@@ -323,11 +370,9 @@ public class LocationMap extends MapActivity implements LocationListener,
 
 		// Add stations
 		if (c.getCount() != 0) {
-			int i = 0;
 			c.moveToFirst();
 			while (c.isAfterLast() == false) {
-				Drawable marker = getResources().getDrawable(
-						R.drawable.pin);
+				Drawable marker = getResources().getDrawable(R.drawable.pin);
 				marker.setBounds(0, 0, marker.getIntrinsicWidth(),
 						marker.getIntrinsicHeight());
 				String id = c.getString(c.getColumnIndex("_id"));
@@ -338,9 +383,8 @@ public class LocationMap extends MapActivity implements LocationListener,
 					GeoPoint markerPosition = new GeoPoint((int) (lat * 1E6),
 							(int) (lon * 1E6));
 					MapOverlay markerOverlay = new MapOverlay(marker,
-							markerPosition, id, name);
+							markerPosition, id, name, CENTER_BOTTOM);
 					mapOverlays.add(markerOverlay);
-					i++;
 				}
 
 				c.moveToNext();
@@ -390,6 +434,29 @@ public class LocationMap extends MapActivity implements LocationListener,
 		list.setAdapter(lAdapter);
 		list.setFastScrollEnabled(true);
 
+		list.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				//
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				int childCount = view.getChildCount();
+
+				for (int i = 0; i < childCount; i++) {
+					View v = view.getChildAt(i);
+					TextView lineNumber = (TextView) v
+							.findViewById(R.id.itemId);
+					lineNumber.setBackgroundColor(BusPlus
+							.getBackgroundColor(lineNumber.getText().toString()));
+					lineNumber.setShadowLayer(3, 0, 0, Color.rgb(0, 0, 0));
+				}
+			}
+		});
+
 		// Listen for clicks on items in the list
 		list.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -423,6 +490,8 @@ public class LocationMap extends MapActivity implements LocationListener,
 										stopManagingCursor(l);
 										l.close();
 
+										status = "showLineA";
+										BusPlus.showLineId = lineId;
 										lineSummary = lineDescA;
 
 										// Draw line markers in direction "A"
@@ -438,6 +507,8 @@ public class LocationMap extends MapActivity implements LocationListener,
 										stopManagingCursor(l);
 										l.close();
 
+										status = "showLineB";
+										BusPlus.showLineId = lineId;
 										lineSummary = lineDescB;
 
 										// Draw line markers in direction "B"
@@ -465,7 +536,6 @@ public class LocationMap extends MapActivity implements LocationListener,
 
 		// Draw stations
 		if (c.getCount() != 0) {
-			int i = 0;
 			c.moveToFirst();
 
 			// Save coordinates for the first station
@@ -473,8 +543,7 @@ public class LocationMap extends MapActivity implements LocationListener,
 			Double cLon = c.getDouble(c.getColumnIndex("lon"));
 
 			while (c.isAfterLast() == false) {
-				Drawable marker = getResources().getDrawable(
-						R.drawable.pin);
+				Drawable marker = getResources().getDrawable(R.drawable.pin);
 				marker.setBounds(0, 0, marker.getIntrinsicWidth(),
 						marker.getIntrinsicHeight());
 				String id = c.getString(c.getColumnIndex("_id"));
@@ -485,9 +554,8 @@ public class LocationMap extends MapActivity implements LocationListener,
 					GeoPoint markerPosition = new GeoPoint((int) (lat * 1E6),
 							(int) (lon * 1E6));
 					MapOverlay markerOverlay = new MapOverlay(marker,
-							markerPosition, id, name);
+							markerPosition, id, name, CENTER_BOTTOM);
 					mapOverlays.add(markerOverlay);
-					i++;
 				}
 				c.moveToNext();
 			}
@@ -527,11 +595,9 @@ public class LocationMap extends MapActivity implements LocationListener,
 		mapOverlays.clear();
 
 		if (c.getCount() != 0) {
-			int i = 0;
 			c.moveToFirst();
 			while (c.isAfterLast() == false) {
-				Drawable marker = getResources().getDrawable(
-						R.drawable.pin);
+				Drawable marker = getResources().getDrawable(R.drawable.pin);
 				marker.setBounds(0, 0, marker.getIntrinsicWidth(),
 						marker.getIntrinsicHeight());
 				String id = c.getString(c.getColumnIndex("_id"));
@@ -542,9 +608,8 @@ public class LocationMap extends MapActivity implements LocationListener,
 					GeoPoint markerPosition = new GeoPoint((int) (lat * 1E6),
 							(int) (lon * 1E6));
 					MapOverlay markerOverlay = new MapOverlay(marker,
-							markerPosition, id, name);
+							markerPosition, id, name, CENTER_BOTTOM);
 					mapOverlays.add(markerOverlay);
-					i++;
 				}
 				c.moveToNext();
 			}
@@ -558,6 +623,56 @@ public class LocationMap extends MapActivity implements LocationListener,
 			moveLocationMarker();
 		else
 			mapView.invalidate();
+	}
+
+	private void drawStationMarker(String stationId) {
+
+		status = "showStation";
+
+		// Get station by it's ID
+		c = helper.getStationById(stationId);
+		startManagingCursor(c);
+
+		// Clear all overlays
+		List<Overlay> mapOverlays = mapView.getOverlays();
+		mapOverlays.clear();
+
+		// Draw station marker and center map on it
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			Drawable marker = getResources().getDrawable(R.drawable.pin);
+			marker.setBounds(0, 0, marker.getIntrinsicWidth(),
+					marker.getIntrinsicHeight());
+			String id = c.getString(c.getColumnIndex("_id"));
+			String name = c.getString(c.getColumnIndex("name"));
+			Double lat = c.getDouble(c.getColumnIndex("lat"));
+			Double lon = c.getDouble(c.getColumnIndex("lon"));
+			if (lat != null && lat != 0 && lon != null && lon != 0) {
+				GeoPoint markerPosition = new GeoPoint((int) (lat * 1E6),
+						(int) (lon * 1E6));
+				MapOverlay markerOverlay = new MapOverlay(marker,
+						markerPosition, id, name, CENTER_BOTTOM);
+				mapOverlays.add(markerOverlay);
+				centerMap(lat, lon);
+				all = false;
+				centered = false;
+			} else
+				Toast.makeText(getApplicationContext(),
+						R.string.no_station_location, Toast.LENGTH_SHORT)
+						.show();
+		} else
+			Toast.makeText(getApplicationContext(),
+					R.string.no_station_location, Toast.LENGTH_SHORT).show();
+		stopManagingCursor(c);
+		c.close();
+
+		// Create location overlay if location provider is available, otherwise
+		// refresh map view
+		if (!noProvider)
+			moveLocationMarker();
+		else
+			mapView.invalidate();
+
 	}
 
 	/** Center map on supplied coordinates **/
@@ -615,11 +730,19 @@ public class LocationMap extends MapActivity implements LocationListener,
 		private OverlayItem item = null;
 
 		public MapOverlay(Drawable marker, GeoPoint point, String code,
-				String name) {
+				String name, int pos) {
 			super(marker);
 
-			// Center markers
-			boundCenter(marker);
+			switch (pos) {
+			case CENTER_BOTTOM:
+				// Align markers center bottom
+				boundCenterBottom(marker);
+				break;
+			case CENTER:
+			default:
+				// Align marker center center
+				boundCenter(marker);
+			}
 
 			item = new OverlayItem(point, name, code);
 			populate();
@@ -647,8 +770,50 @@ public class LocationMap extends MapActivity implements LocationListener,
 						LocationMap.this);
 				tapCode = item.getSnippet();
 				tapName = item.getTitle();
+				
+				c = helper.getLinesByStation(tapCode);
+				startManagingCursor(c);
+
+				String[] lines = new String[c.getCount()];
+				int k = 0;
+				
+				if (c.getCount() != 0) {
+					c.moveToFirst();
+					while (c.isAfterLast() == false) {
+						lines[k] = c.getString(c.getColumnIndex("name"));
+						k++;
+						c.moveToNext();
+					}
+				}
+				
+				stopManagingCursor(c);
+				c.close();
+				
+				LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View v = li.inflate(R.layout.message, null, false);
+
+				TextView stationName = (TextView) v.findViewById(R.id.stationName);
+				stationName.setTextAppearance(LocationMap.this,
+						android.R.style.TextAppearance_Medium);	
+				stationName.setText("[" + tapCode + "] " + tapName);
+
+				FlowLayout fl = (FlowLayout) v.findViewById(R.id.flowLayout);
+				
+				for (String line : lines) {
+					
+					TextView lineTextView = new TextView(LocationMap.this);
+					lineTextView.setTextAppearance(LocationMap.this,
+							android.R.style.TextAppearance_Medium);
+					lineTextView
+							.setBackgroundColor(BusPlus.getBackgroundColor(line));
+					lineTextView.setShadowLayer(3, 0, 0, Color.rgb(0, 0, 0));
+					lineTextView.setText(" " + line + " ");
+					
+					fl.addView(lineTextView);
+				}
+
 				builder.setTitle(getString(R.string.station))
-						.setMessage(tapName + " (" + tapCode + ")")
+						.setView(v)
 						.setNegativeButton(getString(R.string.query),
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,

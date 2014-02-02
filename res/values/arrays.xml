@@ -37,7 +37,7 @@
     </string-array>
     <string-array name="zones">
         <item>@string/its1_1</item>
-        <item>@string/its1_2</item>
+        <item>@string/its1_75min</item>
         <item>@string/its2_1</item>
         <item>@string/its2_2</item>
         <item>@string/its2_3</item>
@@ -48,37 +48,57 @@
         <item>@string/its2_8</item>
         <item>@string/its2_9</item>
         <item>@string/its2_10</item>
+        <item>@string/widget_zone_custom</item>
     </string-array>
     <string-array name="zone_fares">
-        <item>72</item>
-        <item>114</item>
-        <item>96</item>
-        <item>120</item>
-        <item>150</item>
-        <item>180</item>
-        <item>210</item>
-        <item>240</item>
-        <item>270</item>
-        <item>300</item>
-        <item>330</item>
-        <item>360</item>
+        <item>73</item>
+		<item>101</item>
+        <item>97</item>
+        <item>122</item>
+        <item>152</item>
+        <item>183</item>
+        <item>213</item>
+        <item>244</item>
+        <item>275</item>
+        <item>305</item>
+        <item>336</item>
+        <item>366</item>
+        <item>73</item>
+    </string-array>
+    <string-array name="zone_ids">
+        <item>0</item>
+		<item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
     </string-array>
     <string-array name="widget_types">
         <item>@string/widget_type1</item>
         <item>@string/widget_type2</item>
         <item>@string/widget_type3</item>
+        <item>@string/widget_type4</item>
     </string-array>
     <string-array name="widget_types_values">
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
     <string-array name="widget_types_icons">
         <item>@drawable/widget_type1</item>
         <item>@drawable/widget_type2</item>
         <item>@drawable/widget_type3</item>
+        <item>@drawable/widget_type4</item>
     </string-array>
-	<string-array name="carrier_codes">
+    <string-array name="carrier_codes">
         <item>22001</item>
         <item>22003</item>
         <item>22005</item>

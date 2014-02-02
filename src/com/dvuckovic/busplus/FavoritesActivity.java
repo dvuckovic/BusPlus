@@ -6,26 +6,25 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 /** USSD query activity **/
 public class FavoritesActivity extends Activity {
 
 	public final static String EXTRA_ID = "com.dvuckovic.busplus._ID";
 	public final static String INTENT_NAME = "com.dvuckovic.busplus.CALL_USSD_CODE";
+
 	private SharedPreferences prefs;
+	static boolean active = true;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		// Instantiate preference manager
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -34,19 +33,29 @@ public class FavoritesActivity extends Activity {
 		BusPlus bp = (BusPlus) getApplicationContext();
 		bp.setLanguage(prefs.getString("language", "sr"));
 
+		FavoritesActivity.active = true;
+
 		final Intent i = getIntent();
 		final String action = i.getAction();
 
 		if (INTENT_NAME.equals(action)) {
 			String extra = i.getStringExtra(EXTRA_ID);
-			Log.d("FavoritesActivity", extra.toString());
-			if (extra != null) {
+			if (extra != null)
 				callUSSDCode(extra.toString());
-			}
-			// finish();
 		}
 
-		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void onStart() {
+		FavoritesActivity.active = true;
+		super.onStart();
+	}
+
+	@Override
+	protected void onStop() {
+		FavoritesActivity.active = false;
+		super.onStop();
 	}
 
 	/**
@@ -56,7 +65,7 @@ public class FavoritesActivity extends Activity {
 	 * @param stationCode
 	 **/
 	private void callUSSDCode(final String stationCode) {
-		if (prefs.getBoolean("show_warning", true)) {
+		if (prefs.getBoolean("show_warning_permanent", true)) {
 			TelephonyManager manager = (TelephonyManager) getBaseContext()
 					.getSystemService(Context.TELEPHONY_SERVICE);
 			String carrierName = manager.getNetworkOperatorName();
@@ -85,24 +94,11 @@ public class FavoritesActivity extends Activity {
 						carrierName.trim(), carrierRate);
 			}
 
-			View checkBoxView = View.inflate(this, R.layout.checkbox, null);
-			CheckBox checkBox = (CheckBox) checkBoxView
-					.findViewById(R.id.checkbox);
-			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView,
-						boolean isChecked) {
-					prefs.edit().putBoolean("show_warning", !isChecked)
-							.commit();
-				}
-			});
-
 			// Build and show warning dialog
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle(getString(R.string.warning_title))
 					.setMessage(message)
-					.setView(checkBoxView)
-					.setIcon(R.drawable.bus_icon)
+					.setIcon(R.drawable.launcher_icon)
 					.setPositiveButton(getString(R.string.yes),
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -115,6 +111,26 @@ public class FavoritesActivity extends Activity {
 											Uri.parse("tel:" + ussd));
 									i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 									startActivity(i);
+
+									int sid = Integer.parseInt(stationCode);
+									String name = "";
+
+									DataBaseHelper helper = new DataBaseHelper(
+											FavoritesActivity.this);
+									Cursor c = helper
+											.getStationById(stationCode);
+									startManagingCursor(c);
+									if (c.getCount() > 0) {
+										c.moveToFirst();
+										name = c.getString(c
+												.getColumnIndex("name"));
+									}
+									stopManagingCursor(c);
+									c.close();
+
+									helper.insertHistory(sid, name);
+									helper.close();
+
 									finish();
 								}
 							})
@@ -128,13 +144,29 @@ public class FavoritesActivity extends Activity {
 							});
 			AlertDialog alert = builder.create();
 			alert.show();
-
 		} else {
 			String ussd = "*011*" + stationCode + Uri.encode("#");
 			Intent i = new Intent(android.content.Intent.ACTION_CALL,
 					Uri.parse("tel:" + ussd));
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
+
+			int sid = Integer.parseInt(stationCode);
+			String name = "";
+
+			DataBaseHelper helper = new DataBaseHelper(this);
+			Cursor c = helper.getStationById(stationCode);
+			startManagingCursor(c);
+			if (c.getCount() > 0) {
+				c.moveToFirst();
+				name = c.getString(c.getColumnIndex("name"));
+			}
+			stopManagingCursor(c);
+			c.close();
+
+			helper.insertHistory(sid, name);
+			helper.close();
+
 			finish();
 		}
 	}
